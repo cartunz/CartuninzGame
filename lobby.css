@@ -1,0 +1,1358 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Russo One', sans-serif;
+    background-image: url('lost_forest_lobby_bg_1772681552531.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-color: #fce8a4;
+    animation: panBackground 30s ease-in-out infinite alternate;
+}
+
+@keyframes panBackground {
+    0% {
+        background-size: 100%;
+        background-position: center bottom;
+    }
+
+    50% {
+        background-size: 105%;
+        background-position: left bottom;
+    }
+
+    100% {
+        background-size: 110%;
+        background-position: right bottom;
+    }
+}
+
+.lobby-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header section styling --- */
+.lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    z-index: 10;
+    /* Added HUD bar background */
+    background: rgba(222, 193, 151, 0.95);
+    border-bottom: 3px solid #111;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.user-info:hover {
+    transform: scale(1.02);
+}
+
+.user-info:active {
+    transform: scale(0.98);
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    background-color: #633af2;
+    /* purpleish-blue */
+    border-radius: 50%;
+    border: 4px solid #111;
+    /* increased border to stand out more */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-inner {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 45px;
+    height: 45px;
+    background-color: #d8c3fa;
+    /* lighter purple for the avatar shape inside */
+    border-radius: 50%;
+    border-right: 1px solid #111;
+    border-top: 1px solid #111;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-family: 'Russo One', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: #111;
+    letter-spacing: 1.5px;
+    line-height: 1;
+}
+
+.rank {
+    font-family: 'Russo One', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #4a2e12;
+    /* Dark brown */
+    letter-spacing: 1px;
+    margin-top: 4px;
+    line-height: 1;
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.1s;
+}
+
+.hamburger-menu:hover {
+    transform: scale(1.05);
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 35px;
+    height: 4px;
+    background-color: #111;
+    /* Reverted to dark */
+    border-radius: 2px;
+}
+
+/* --- Main content side navigation styling --- */
+.main-content {
+    flex: 1;
+    position: relative;
+}
+
+.side-nav {
+    position: absolute;
+    left: -20px;
+    /* pull them out so they touch the left screen edge */
+    top: 90px;
+    /* Moved down slightly as requested */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Increased gap */
+}
+
+.nav-btn {
+    background-color: #d1b48b;
+    /* tan/light brown like the login inputs */
+    color: #000;
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    /* Made font bigger */
+    letter-spacing: 1px;
+    border: 3px solid #3b2413;
+    /* slightly thicker border */
+    padding: 12px 30px 12px 50px;
+    /* Made button bigger */
+    /* extra padding on left since it's pushed off screen */
+    border-radius: 0 35px 35px 0;
+    /* More rounded pill shape */
+    cursor: pointer;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s, filter 0.1s;
+    text-align: left;
+    width: 220px;
+    /* Made button wider */
+}
+
+.nav-btn:hover {
+    filter: brightness(1.1);
+    transform: translateX(5px);
+}
+
+.nav-btn:active {
+    transform: translateX(2px) translateY(2px);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Bottom bar styling --- */
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+/* Background strip for the bottom bar */
+.bottom-bar-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #d1b48b;
+    border-top: 2px solid #8e6c46;
+    z-index: 1;
+}
+
+.bottom-btn {
+    position: relative;
+    z-index: 2;
+    height: 80px;
+    border: none;
+    color: #000;
+    font-family: 'Anton', sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.1s, transform 0.1s;
+    border-top: 3px solid #111;
+}
+
+.bottom-btn:hover {
+    filter: brightness(1.05);
+}
+
+.bottom-btn:active {
+    transform: translateY(2px);
+}
+
+/* Left button styles (Inventory) - Slanted right side */
+.inventory-btn {
+    background-color: #ffea00;
+    /* bright yellow */
+    width: 25%;
+    min-width: 220px;
+    border-right: 3px solid #111;
+    /* create the slanted trapezoid angle */
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 0 100%);
+    padding-right: 20px;
+}
+
+/* Right button styles (Play) - Slanted left side */
+.play-btn {
+    background-color: #ff1111;
+    /* bright red */
+    width: 25%;
+    min-width: 220px;
+    border-left: 3px solid #111;
+    /* create the slanted trapezoid angle */
+    clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%);
+    padding-left: 20px;
+}
+
+/* --- Character Modal Overlay Styling --- */
+.char-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Create the blurred background effect over the rest of the lobby */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.char-modal-overlay.hidden {
+    display: none;
+}
+
+/* Outer Border Container */
+.char-modal-content {
+    width: 90%;
+    max-width: 1100px;
+    height: 90%;
+    max-height: 700px;
+    background-color: #d1b48b;
+    /* Tan background */
+    border: 12px solid #a37b56;
+    /* Thick lighter brown outer border */
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+/* --- Top Navigation Tabs --- */
+.char-tabs {
+    display: flex;
+    gap: 0;
+    /* Remove gap so borders touch */
+    position: relative;
+    margin-bottom: -4px;
+    /* Pull it down to merge with the inner border */
+    z-index: 5;
+    padding-left: 20px;
+    align-items: flex-end;
+    /* Align tabs to the bottom edge */
+}
+
+.char-tab {
+    background-color: #e1dac6;
+    /* Light grey/tan for inactive */
+    color: #0b0b0b;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 15px 25px 5px 25px;
+    /* Taller on top to handle slant */
+    border: 3px solid #3c240c;
+    /* Matches dark inner panel */
+    border-bottom: none;
+    /* Merges into the content below */
+    margin-right: -3px;
+    /* Overlap borders to prevent doubling */
+    cursor: pointer;
+    /* Sharp upward slant from left to right on inactive tabs */
+    clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%);
+    transition: background-color 0.1s;
+}
+
+.char-tab.active {
+    background-color: #61400e;
+    /* Dark gold/brown for active */
+    color: #f7da64;
+    /* Soft yellow text */
+    /* Active tab is FLAT on top, removing the slant */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    padding: 8px 15px 5px 15px;
+    /* Standard flat padding */
+    z-index: 2;
+    /* Pop above inactive tabs */
+}
+
+/* Modal Close Button */
+.char-close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #e6e1d1;
+    border: 2px solid #111;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.char-close-btn:hover {
+    background-color: #dcdcdc;
+}
+
+/* --- Main Inner Panel (The dark brown bounding box) --- */
+.char-inner-panel {
+    flex: 1;
+    background-color: transparent;
+    border: 6px solid #4a2e12;
+    /* Darker brown boundary */
+    border-radius: 12px;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    position: relative;
+    z-index: 4;
+    /* Behind the tabs */
+    margin-bottom: 10px;
+}
+
+/* --- Left Pane (Character Display) --- */
+.char-left-pane {
+    flex: 1.2;
+    background-color: #e0ac58;
+    /* Warm gold/tan inner backdrop */
+    border-radius: 8px;
+    border: 2px solid #111;
+    /* subtle inner border if desired, or none */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.char-backdrop {
+    flex: 1;
+    /* Placeholder rendering */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.char-info-box {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.char-icon-slot {
+    width: 60px;
+    height: 80px;
+    background-color: #a37b56;
+    border: 2px solid #4a2e12;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.char-name-display {
+    font-family: 'Russo One', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #111;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Right Pane (Item Grid) --- */
+.char-right-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pane-header {
+    background-color: #4a2e12;
+    color: #ffd700;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.pane-header.bag-header {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+    border-radius: 8px 8px 0 0;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    height: 35px;
+}
+
+.hidden-pane {
+    display: none !important;
+}
+
+.item-grid-container {
+    flex: 1;
+    background-color: #d1b48b;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* ensure the background flows nicely if full-width header */
+}
+
+/* Inner Tabs inside the grid */
+.grid-tabs {
+    display: flex;
+    margin-left: 20px;
+    z-index: 5;
+    position: relative;
+    margin-top: 10px;
+}
+
+.grid-tab {
+    background-color: #a37b56;
+    color: #111;
+    font-family: 'Russo One', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 20px 6px 15px;
+    border: 1px solid #111;
+    border-bottom: none;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
+    margin-right: -5px;
+}
+
+.grid-tab.active {
+    background-color: #dcdcdc;
+    /* Light grey when active */
+}
+
+/* Base Grid container */
+.items-grid {
+    flex: 1;
+    background-color: #e6e1d1;
+    /* Light grey/tan grid area */
+    border: 4px solid #4a2e12;
+    border-radius: 8px;
+    margin-top: -1px;
+    /* Overlap the tabs */
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Bag 4x5 Specific Grid */
+.items-grid.bag-items-grid {
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.grid-slot {
+    background-color: #a37b56;
+    /* Darker brown empty slot */
+    border: 2px solid #856140;
+    /* Slightly darker border for depth */
+    border-radius: 8px;
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out, background-color 0.1s;
+    outline: none;
+    padding: 0;
+    /* To allow centering of future item images inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-slot:hover {
+    background-color: #b58d68;
+    /* Slightly lighter on hover */
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    /* Lift up effect */
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.grid-slot:active {
+    transform: scale(0.95) translateY(0);
+    /* Press down effect */
+    box-shadow: inset 0 6px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-color: #926a45;
+}
+
+/* Grid Footer (Trash & Pagination) */
+.grid-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #e6e1d1;
+    border: 4px solid #4a2e12;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.trash-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-num,
+.page-arrow {
+    width: 25px;
+    height: 25px;
+    background-color: #a37b56;
+    color: #111;
+    border: none;
+    border-radius: 50%;
+    font-family: 'Russo One', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-num.active {
+    background-color: #4cd137;
+    /* Green active page */
+    color: #111;
+}
+
+.page-dots {
+    background-color: #a37b56;
+    color: #111;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+/* --- Bottom Equipment Bar --- */
+.char-equipment-bar {
+    background-color: #e1c8a3;
+    /* Light tan fill */
+    border: 6px solid #3c240c;
+    /* Very dark brown outer border */
+    border-radius: 12px;
+    padding: 4px;
+    /* Space between dark border and inner gold border */
+    position: relative;
+    margin-top: 15px;
+}
+
+.equip-header {
+    background-color: #3c240c;
+    /* Matches the dark border */
+    color: #f7da64;
+    /* Soft yellow text */
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    position: absolute;
+    top: -24px;
+    left: -6px;
+    padding: 2px 35px 2px 15px;
+    border-radius: 12px 0 0 0;
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.equip-slots {
+    border: 3px solid #cb9641;
+    /* Inner golden-brown frame */
+    border-radius: 10px;
+    display: flex;
+    gap: 6px;
+    justify-content: space-between;
+    padding: 6px;
+    /* Space between the slots and the inner golden frame */
+}
+
+.equip-slot {
+    flex: 1;
+    height: 75px;
+    background-color: #8f7457;
+    /* Dark grayish-brown slot top */
+    border-radius: 12px 12px 8px 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5);
+    /* Inner shadow for depth */
+}
+
+.slot-num {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    background-color: #cc8d34;
+    /* Rich golden-orange bottom strip */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Russo One', sans-serif;
+    font-size: 11px;
+    color: #0b0b0b;
+    border-top: 2px solid #6b4d32;
+    /* Separation line */
+}
+
+/* --- Settings Modal Styling --- */
+.settings-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.settings-modal-overlay.hidden {
+    display: none;
+}
+
+/* Wrapper for protruding elements */
+.settings-modal-wrapper {
+    position: relative;
+    width: 800px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main background box */
+.settings-modal-content {
+    width: 100%;
+    height: 100%;
+    background-color: #cca468;
+    /* Light brown/tan background matching reference */
+    border-radius: 12px;
+    border: 8px solid #f2edd3;
+    /* Off-white outer border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+/* Inner dark brown border */
+.settings-inner-border {
+    width: 100%;
+    height: 100%;
+    border: 6px solid #483318;
+    border-radius: 8px;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* The "MENU" Badge protruding from top */
+.settings-title-badge {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4a2e00;
+    /* Darker brown */
+    color: #ffdf60;
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    padding: 5px 35px;
+    border-radius: 16px;
+    border: 4px solid #3c240c;
+    z-index: 15;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* The 'X' Close Button protruding from top right corner */
+.settings-close-icon {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 50px;
+    height: 50px;
+    background-color: #f2edd3;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transform: rotate(6deg);
+    transition: transform 0.1s, filter 0.1s;
+}
+
+.settings-close-icon:hover {
+    filter: brightness(1.1);
+    transform: rotate(6deg) scale(1.05);
+}
+
+.settings-close-icon:active {
+    transform: rotate(0deg) scale(0.95);
+}
+
+/* Left Sidebar containing the menus */
+.settings-sidebar {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 5px;
+    /* Give space between tabs and content bg */
+}
+
+/* The tab items */
+.settings-tab {
+    background-color: #53350c;
+    /* Very dark rich brown */
+    color: #ffdf60;
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    text-align: center;
+    border: 4px solid #301f05;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    text-transform: uppercase;
+}
+
+/* Active Tab Styles */
+.settings-tab.active {
+    background-color: #e0d9ca;
+    /* light grey/beige */
+    color: #111;
+    border: 4px solid #854fd6;
+    /* Distinct purple border exactly like reference */
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.settings-tab:hover:not(.active) {
+    background-color: #694514;
+}
+
+/* Right Content Area Box */
+.settings-content-area {
+    flex: 1;
+    background-color: #d1ccbf;
+    /* accurate greyish/beige color */
+    border-radius: 12px;
+    border: 3px solid #bba37b;
+    /* subtle inner stroke */
+    position: relative;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Red Logout Button */
+.settings-logout-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #cf5b5b;
+    /* Soft red */
+    color: #111;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    padding: 5px 25px;
+    border-radius: 20px;
+    /* Pill shaped */
+    border: 3px solid #9c4040;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: filter 0.1s, transform 0.1s;
+}
+
+.settings-logout-btn:hover {
+    filter: brightness(1.1);
+}
+
+.settings-logout-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Hiding Panes */
+.settings-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-pane.hidden-pane {
+    display: none;
+}
+
+/* Standardizing content options inside */
+.settings-option {
+    display: flex;
+    width: 80%;
+    margin: 0 auto 20px auto;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e5d8c6;
+    border: 2px solid #b8a081;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 20px;
+    color: #333;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn {
+    background-color: #4cd137;
+    color: #111;
+    border: 2px solid #2e7d32;
+    padding: 5px 20px;
+    border-radius: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn.off {
+    background-color: #ff1111;
+    border-color: #a00;
+}
+
+.toggle-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Group for Quality Settings */
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.choice-btn {
+    background-color: #a37b56;
+    color: #111;
+    border: 2px solid #4a2e12;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.choice-btn.active {
+    background-color: #4cd137;
+    /* Green highlight like the toggle */
+    color: #111;
+    border-color: #2e7d32;
+}
+
+/* Range Slider */
+.styled-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 10px;
+    background: #a37b56;
+    border: 2px solid #4a2e12;
+    border-radius: 5px;
+    outline: none;
+}
+
+.styled-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffdf60;
+    border: 2px solid #4a2e00;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Keybind Button */
+.keybind-btn {
+    background-color: #dcdcdc;
+    /* whitish */
+    color: #111;
+    border: 2px solid #555;
+    padding: 5px 20px;
+    border-radius: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Select Dropdown */
+.styled-select {
+    background-color: #dcdcdc;
+    color: #111;
+    border: 2px solid #555;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+/* --- Profile Modal Styling --- */
+.profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.profile-modal-overlay.hidden {
+    display: none;
+}
+
+.profile-modal-content {
+    position: relative;
+    width: 600px;
+    /* Made modal bigger */
+    background-color: #efe3ce;
+    /* Matched image background closer */
+    border-radius: 12px;
+    border: 6px solid #483318;
+    /* Dark brown border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 35px;
+    /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Increased gap */
+}
+
+/* Redefining close button position for Profile Modal without wrapper */
+.profile-close-btn {
+    top: -15px;
+    right: -15px;
+}
+
+/* Profile Header Section */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #d2c1aa;
+    padding: 15px;
+    border-radius: 10px;
+    border: 3px solid #b8a081;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar-large {
+    width: 100px;
+    height: 100px;
+    background-color: #633af2;
+    border-radius: 50%;
+    border: 4px solid #111;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-inner-large {
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 75px;
+    height: 75px;
+    background-color: #d8c3fa;
+    border-radius: 50%;
+    border-right: 2px solid #111;
+    border-top: 2px solid #111;
+}
+
+.profile-info-large {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-name-large {
+    font-family: 'Russo One', sans-serif;
+    font-size: 38px;
+    /* Slightly larger */
+    color: #111;
+    line-height: 1;
+}
+
+.edit-name-btn {
+    background-color: #d1b48b;
+    color: #483318;
+    border: 2px solid #483318;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s, background-color 0.1s;
+}
+
+.edit-name-btn:hover {
+    background-color: #e5d8c6;
+    transform: scale(1.05);
+}
+
+.edit-name-btn:active {
+    transform: scale(0.95);
+}
+
+.profile-rank-large {
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    /* Slightly larger */
+    color: #4a2e12;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.name-change-limit {
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    color: #c94c4c;
+    /* Red color for warning/limit */
+    letter-spacing: 1px;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+/* Profile Stats Row */
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.stat-box {
+    flex: 1;
+    background-color: #483318;
+    color: #ffda75;
+    padding: 15px 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: 3px solid #301f05;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.stat-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 14px;
+    color: #d1b48b;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    color: #ffda75;
+    letter-spacing: 1px;
+}
+
+/* Badges Section */
+.profile-badges-section {
+    background-color: #d2c1aa;
+    padding: 15px;
+    border-radius: 10px;
+    border: 3px solid #b8a081;
+}
+
+.badge-title {
+    font-family: 'Russo One', sans-serif;
+    font-size: 16px;
+    color: #483318;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.badges-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.badge-slot {
+    width: 50px;
+    height: 50px;
+    background-color: #e5d8c6;
+    border: 2px solid #b8a081;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.badge-slot.empty {
+    background-color: #c4b59e;
+}
+
+/* --- Change Name Modal --- */
+.change-name-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    /* above profile modal */
+}
+
+.change-name-overlay.hidden {
+    display: none;
+}
+
+.change-name-content {
+    background-color: #d1b48b;
+    border: 4px solid #483318;
+    border-radius: 12px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.change-name-title {
+    font-family: 'Russo One', sans-serif;
+    color: #111;
+    font-size: 24px;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.change-name-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    border: 3px solid #483318;
+    border-radius: 8px;
+    background-color: #f4ecd8;
+    color: #111;
+    outline: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.change-name-input:focus {
+    border-color: #633af2;
+}
+
+.change-name-notice {
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    color: #c94c4c;
+    /* Red text for warning */
+    margin: 10px 0 0 0;
+    text-shadow: 1px 1px 2px rgba(201, 76, 76, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.change-name-error {
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    color: #ff3333;
+    /* Brighter red for error */
+    margin: 10px 0 0 0;
+    text-shadow: 1px 1px 2px rgba(255, 51, 51, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.change-name-error.hidden {
+    display: none;
+}
+
+.change-name-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.change-name-btn {
+    flex: 1;
+    padding: 12px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 16px;
+    border: 3px solid #301f05;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.change-name-btn.cancel {
+    background-color: #c94c4c;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.change-name-btn.confirm {
+    background-color: #6da34d;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.change-name-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.change-name-btn:active {
+    transform: translateY(2px);
+}
