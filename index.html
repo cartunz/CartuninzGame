@@ -102,6 +102,10 @@
             <div class="modal-inner">
                 <input type="text" placeholder="Enter username" class="modal-input" id="loginUsername">
                 <input type="password" placeholder="Enter password" class="modal-input" id="loginPassword">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showLoginPasswordToggle" class="custom-checkbox">
+                    <label for="showLoginPasswordToggle" class="checkbox-label">Show Password</label>
+                </div>
                 <button class="modal-submit-btn" id="loginSubmitBtn">LOGIN</button>
             </div>
         </div>
@@ -119,11 +123,50 @@
                 <input type="email" placeholder="Enter E-mail" class="modal-input signup-input">
                 <input type="password" placeholder="Enter password" class="modal-input signup-input">
                 <input type="password" placeholder="Confirm password" class="modal-input signup-input">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showPasswordToggle" class="custom-checkbox">
+                    <label for="showPasswordToggle" class="checkbox-label">Show Password</label>
+                </div>
                 <button class="modal-submit-btn" id="signupSubmitBtn" style="font-size: 26px;">CREATE ACCOUNT</button>
             </div>
         </div>
 
+        <div class="setup-name-modal hidden" id="setupNameModal">
+            <div class="modal-title" style="font-size: 26px;">CREATE GAME NAME</div>
+            <div class="modal-inner">
+                <input type="text" placeholder="Enter game name" class="modal-input" id="setupGameName" maxlength="12">
+                <p class="change-name-error hidden" id="setupNameErrorMsg"
+                    style="color: #ff4d4d; font-family: 'Russo One', sans-serif; font-size: 14px; margin-top: -10px; margin-bottom: 10px; text-shadow: 1px 1px 0 #000;">
+                    Name already taken</p>
+                <button class="modal-submit-btn" id="setupNameSubmitBtn" style="font-size: 22px;">ENTER WORLD</button>
+            </div>
+        </div>
+
+        <!-- Custom Notification Modal -->
+        <div class="notification-modal hidden" id="notificationModal">
+            <div class="modal-title" id="notificationTitle">SUCCESS</div>
+            <div class="modal-inner">
+                <p id="notificationMessage"
+                    style="text-align: center; font-family: 'Russo One', sans-serif; color: #3c240c; font-size: 18px; margin-bottom: 25px; text-shadow: 1px 1px 0 rgba(255,255,255,0.5);">
+                    Account created successfully!
+                </p>
+                <button class="modal-submit-btn" id="notificationOkBtn"
+                    style="font-size: 26px; margin-top: 0;">OK</button>
+            </div>
+        </div>
+
         <div class="version-text">gawang pinoy</div>
+
+        <!-- Fullscreen Loading Overlay -->
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="loading-content">
+                <img src="cz.png" alt="Cartuninz Loading Logo" class="loading-logo">
+                <div class="loading-bar-container">
+                    <div class="loading-bar-fill" id="loadingBarFill"></div>
+                </div>
+                <div class="loading-text">CARTUNINZ WORLD...</div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
