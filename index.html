@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartuninz Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-overlay"></div>
+
+    <div class="game-container">
+        <h1 class="game-title">
+            <span>C</span><span>A</span><span>R</span><span>T</span><span>U</span><span>N</span><span>I</span><span>N</span><span>Z</span>
+        </h1>
+
+        <div class="center-piece">
+            <div class="swords-layer">
+                <!-- Sword Left -->
+                <svg viewBox="0 0 100 500" class="sword sword-left">
+                    <!-- blade -->
+                    <path d="M40 20 L50 0 L60 20 L60 350 L40 350 Z" fill="#d1d5db" stroke="#111" stroke-width="4" />
+                    <line x1="50" y1="20" x2="50" y2="350" stroke="#9ca3af" stroke-width="2" />
+                    <path d="M40 20 L50 0 L60 20" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round" />
+                    <path d="M40 350 L60 350" fill="none" stroke="#111" stroke-width="4" />
+                    <!-- crossguard -->
+                    <rect x="20" y="348" width="60" height="20" rx="8" fill="#4a5568" stroke="#111" stroke-width="4" />
+                    <line x1="25" y1="358" x2="75" y2="358" stroke="#111" stroke-width="4" opacity="0.3" />
+                    <!-- grip -->
+                    <rect x="42" y="368" width="16" height="70" fill="#3b2413" stroke="#111" stroke-width="4" />
+                    <line x1="42" y1="380" x2="58" y2="385" stroke="#111" stroke-width="2" />
+                    <line x1="42" y1="395" x2="58" y2="400" stroke="#111" stroke-width="2" />
+                    <line x1="42" y1="410" x2="58" y2="415" stroke="#111" stroke-width="2" />
+                    <!-- pommel -->
+                    <circle cx="50" cy="445" r="14" fill="#4a5568" stroke="#111" stroke-width="4" />
+                </svg>
+
+                <!-- Sword Right -->
+                <svg viewBox="0 0 100 500" class="sword sword-right">
+                    <!-- blade -->
+                    <path d="M40 20 L50 0 L60 20 L60 350 L40 350 Z" fill="#d1d5db" stroke="#111" stroke-width="4" />
+                    <line x1="50" y1="20" x2="50" y2="350" stroke="#9ca3af" stroke-width="2" />
+                    <path d="M40 20 L50 0 L60 20" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round" />
+                    <path d="M40 350 L60 350" fill="none" stroke="#111" stroke-width="4" />
+                    <!-- crossguard -->
+                    <rect x="20" y="348" width="60" height="20" rx="4" fill="#6b7280" stroke="#111" stroke-width="4" />
+                    <!-- decorative ridges -->
+                    <path d="M20 348 L25 330 L30 348" fill="#6b7280" stroke="#111" stroke-width="3" />
+                    <path d="M80 348 L75 330 L70 348" fill="#6b7280" stroke="#111" stroke-width="3" />
+                    <!-- grip -->
+                    <rect x="42" y="368" width="16" height="70" fill="#1f2937" stroke="#111" stroke-width="4" />
+                    <!-- pommel -->
+                    <path d="M35 440 L65 440 L50 460 Z" fill="#6b7280" stroke="#111" stroke-width="4" />
+                </svg>
+            </div>
+
+            <div class="shield">
+                <!-- Details to simulate grooved planks -->
+                <div class="shield-groove groove-1"></div>
+                <div class="shield-groove groove-2"></div>
+                <div class="shield-groove groove-3"></div>
+                <div class="shield-groove groove-4"></div>
+                <div class="shield-rim"></div>
+
+                <div class="buttons-container">
+                    <button class="game-btn btn-login" id="mainLoginBtn">
+                        <div class="icon-wrap login-icon">
+                            <!-- Keyhole icon -->
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <circle cx="12" cy="9" r="4" fill="#222" />
+                                <path d="M10 12 L14 12 L15 18 L9 18 Z" fill="#222" />
+                            </svg>
+                        </div>
+                        <span class="btn-text">LOGIN</span>
+                    </button>
+
+                    <button class="game-btn btn-signup" id="mainSignupBtn">
+                        <div class="icon-wrap signup-icon">
+                            <!-- Scroll/Feather icon (simple shape) -->
+                            <span style="font-size: 14px;">📜</span>
+                        </div>
+                        <span class="btn-text">SIGN UP</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-modal hidden" id="loginModal">
+            <button class="modal-back-btn" id="modalBackBtn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="#2a1a08" stroke-width="4"
+                        stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="modal-title">LOGIN</div>
+            <div class="modal-inner">
+                <input type="text" placeholder="Enter username" class="modal-input" id="loginUsername">
+                <input type="password" placeholder="Enter password" class="modal-input" id="loginPassword">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showLoginPasswordToggle" class="custom-checkbox">
+                    <label for="showLoginPasswordToggle" class="checkbox-label">Show Password</label>
+                </div>
+                <button class="modal-submit-btn" id="loginSubmitBtn">LOGIN</button>
+            </div>
+        </div>
+
+        <div class="signup-modal hidden" id="signupModal">
+            <button class="modal-back-btn" id="signupBackBtn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="#2a1a08" stroke-width="4"
+                        stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="modal-title">SIGN UP</div>
+            <div class="modal-inner">
+                <input type="text" placeholder="Enter username" class="modal-input signup-input">
+                <input type="email" placeholder="Enter E-mail" class="modal-input signup-input">
+                <input type="password" placeholder="Enter password" class="modal-input signup-input">
+                <input type="password" placeholder="Confirm password" class="modal-input signup-input">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showPasswordToggle" class="custom-checkbox">
+                    <label for="showPasswordToggle" class="checkbox-label">Show Password</label>
+                </div>
+                <button class="modal-submit-btn" id="signupSubmitBtn" style="font-size: 26px;">CREATE ACCOUNT</button>
+            </div>
+        </div>
+
+        <div class="setup-name-modal hidden" id="setupNameModal">
+            <div class="modal-title" style="font-size: 26px;">CREATE GAME NAME</div>
+            <div class="modal-inner">
+                <input type="text" placeholder="Enter game name" class="modal-input" id="setupGameName" maxlength="12">
+                <p class="change-name-error hidden" id="setupNameErrorMsg"
+                    style="color: #ff4d4d; font-family: 'Russo One', sans-serif; font-size: 14px; margin-top: -10px; margin-bottom: 10px; text-shadow: 1px 1px 0 #000;">
+                    Name already taken</p>
+                <button class="modal-submit-btn" id="setupNameSubmitBtn" style="font-size: 22px;">ENTER WORLD</button>
+            </div>
+        </div>
+
+        <!-- Custom Notification Modal -->
+        <div class="notification-modal hidden" id="notificationModal">
+            <div class="modal-title" id="notificationTitle">SUCCESS</div>
+            <div class="modal-inner">
+                <p id="notificationMessage"
+                    style="text-align: center; font-family: 'Russo One', sans-serif; color: #3c240c; font-size: 18px; margin-bottom: 25px; text-shadow: 1px 1px 0 rgba(255,255,255,0.5);">
+                    Account created successfully!
+                </p>
+                <button class="modal-submit-btn" id="notificationOkBtn"
+                    style="font-size: 26px; margin-top: 0;">OK</button>
+            </div>
+        </div>
+
+        <div class="version-text">gawang pinoy</div>
+
+        <!-- Fullscreen Loading Overlay -->
+        <div class="loading-overlay hidden" id="loadingOverlay">
+            <div class="loading-content">
+                <img src="cz.png" alt="Cartuninz Loading Logo" class="loading-logo">
+                <div class="loading-bar-container">
+                    <div class="loading-bar-fill" id="loadingBarFill"></div>
+                </div>
+                <div class="loading-text">CARTUNINZ WORLD...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
