@@ -166,19 +166,15 @@ html {
 }
 
 .game-btn {
-    background: linear-gradient(to bottom, #8a6036, #5c3b1e);
-    border: 3px solid #36220e;
-    border-radius: 12px;
-    box-shadow:
-        0 0 0 4px #1a1a1a,
-        inset 0 4px 6px rgba(255, 255, 255, 0.15),
-        0 8px 15px rgba(0, 0, 0, 0.7);
+    background-color: #7a5028;
+    border: 4px solid #1a1a1a;
+    border-radius: 0;
+    box-shadow: 5px 5px 0 #1a1a1a;
     color: #ffda75;
-    /* light gold text */
     font-family: 'Anton', sans-serif;
     font-size: 32px;
     letter-spacing: 2px;
-    text-shadow: 2px 2px 0 #1a1a1a, 0px 4px 5px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 0 #1a1a1a;
     padding: 10px 40px;
     display: flex;
     flex-direction: column;
@@ -186,19 +182,18 @@ html {
     position: relative;
     cursor: pointer;
     width: 200px;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .game-btn:hover {
     filter: brightness(1.1);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #1a1a1a;
 }
 
 .game-btn:active {
-    transform: translateY(4px);
-    box-shadow:
-        0 0 0 4px #1a1a1a,
-        inset 0 2px 10px rgba(0, 0, 0, 0.5),
-        0 4px 5px rgba(0, 0, 0, 0.7);
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #1a1a1a;
 }
 
 .icon-wrap {
@@ -206,13 +201,13 @@ html {
     height: 30px;
     position: absolute;
     top: -20px;
-    background: radial-gradient(circle, #fcd874, #c2952f);
+    background-color: #fcd874;
     border: 3px solid #1a1a1a;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 3px 3px 0 #1a1a1a;
 }
 
 .login-icon svg {
@@ -272,12 +267,9 @@ html {
     width: 380px;
     height: 420px;
     background-color: #be8e4c;
-    border-radius: 8px;
-    border: 4px solid #fce6bb;
-    /* Adding the purple border effect seen in the reference */
-    box-shadow:
-        0 0 0 2px #7a5482,
-        0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 0;
+    border: 6px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -290,11 +282,9 @@ html {
     width: 380px;
     height: 560px;
     background-color: #be8e4c;
-    border-radius: 8px;
-    border: 4px solid #fce6bb;
-    box-shadow:
-        0 0 0 2px #7a5482,
-        0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 0;
+    border: 6px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -307,30 +297,25 @@ html {
     width: 380px;
     height: 280px;
     background-color: #be8e4c;
-    border-radius: 8px;
-    border: 4px solid #fce6bb;
-    box-shadow:
-        0 0 0 2px #7a5482,
-        0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 0;
+    border: 6px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     z-index: 10;
     padding: 10px;
 }
 
-/* Custom Notification Modal (shares styling with above modals) */
+/* Custom Notification Modal */
 .notification-modal {
     position: relative;
     margin-top: 80px;
     width: 380px;
     height: 280px;
-    /* Increased height slightly to fit text better */
     background-color: #be8e4c;
-    border-radius: 8px;
-    border: 4px solid #fce6bb;
-    box-shadow:
-        0 0 0 2px #7a5482,
-        0 10px 30px rgba(0, 0, 0, 0.8);
+    border-radius: 0;
+    border: 6px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -348,50 +333,43 @@ html {
     position: absolute;
     top: -15px;
     right: -15px;
-    /* Changed from left to right */
     width: 45px;
-    /* Made slightly larger */
     height: 45px;
     background-color: #d2c1aa;
-    /* Light tan color matching the input boxes */
-    border: 3px solid #b8a081;
-    /* Border to match tan style */
-    border-radius: 12px;
-    /* Rounded square instead of circle */
+    border: 4px solid #2b1704;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 20;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-    transition: transform 0.1s, filter 0.1s;
+    box-shadow: 4px 4px 0 #2b1704;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .modal-back-btn:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 #2b1704;
 }
 
 .modal-back-btn:active {
-    transform: scale(0.95);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), inset 0 2px 6px rgba(0, 0, 0, 0.3);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #2b1704;
 }
 
 .modal-inner {
     background-color: #dfbf86;
-    border: 4px solid #36220e;
-    border-radius: 8px;
-    /* Slightly round all corners */
+    border: 4px solid #2b1704;
+    border-radius: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 60px 30px 40px;
     position: relative;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-    /* Prevent sharp corners from overflowing the parent border radius */
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    box-shadow: inset 3px 3px 0 rgba(0, 0, 0, 0.15);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .modal-title {
@@ -405,9 +383,10 @@ html {
     font-size: 36px;
     letter-spacing: 2px;
     padding: 5px 40px;
-    border-radius: 12px;
+    border-radius: 0;
     z-index: 15;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 4px 0 #2b1704;
+    text-shadow: 2px 2px 0 #000;
     white-space: nowrap;
 }
 
@@ -415,15 +394,15 @@ html {
     width: 100%;
     height: 55px;
     background-color: #d2c1aa;
-    border: 2px solid #b8a081;
-    border-radius: 8px;
+    border: 4px solid #2b1704;
+    border-radius: 0;
     font-family: 'Russo One', sans-serif;
     font-size: 18px;
     padding: 0 15px;
     color: #333;
     outline: none;
     margin-bottom: 25px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 #2b1704;
     text-align: center;
 }
 
@@ -465,25 +444,28 @@ html {
 .modal-submit-btn {
     margin-top: auto;
     background-color: #4a9e50;
-    color: #000;
+    color: #fff;
     font-family: 'Anton', sans-serif;
     font-size: 32px;
     letter-spacing: 1px;
     padding: 10px 50px;
-    border-radius: 8px;
-    border: 2px solid #2e7d32;
+    border-radius: 0;
+    border: 4px solid #2e7d32;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s, filter 0.1s;
+    box-shadow: 5px 5px 0 #1d5e22;
+    text-shadow: 2px 2px 0 #1d5e22;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .modal-submit-btn:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #1d5e22;
 }
 
 .modal-submit-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #1d5e22;
 }
 
 /* Loading Overlay Styling */
@@ -520,17 +502,18 @@ html {
     width: 300px;
     height: 20px;
     background-color: #2a1a08;
-    border: 3px solid #5a3a18;
-    border-radius: 10px;
+    border: 4px solid #5a3a18;
+    border-radius: 0;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 0 #1a0a00;
 }
 
 .loading-bar-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #d1a550 0%, #ffe285 100%);
+    background-color: #ffd84d;
+    border-right: 2px solid #c9950a;
     transition: width 0.1s linear;
 }
 

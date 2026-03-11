@@ -1,4 +1,4 @@
-* {
+﻿* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -84,11 +84,9 @@ html {
     align-items: center;
     padding: 15px 30px;
     z-index: 10;
-    /* Added HUD bar background */
-    background: rgba(222, 193, 151, 0.4);
-    border-bottom: 3px solid #111;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background-color: #d4b97a;
+    border-bottom: 4px solid #2b1704;
+    box-shadow: 0 4px 0 #2b1704;
 }
 
 .user-info {
@@ -111,13 +109,11 @@ html {
     width: 60px;
     height: 60px;
     background-color: #633af2;
-    /* purpleish-blue */
-    border-radius: 50%;
+    border-radius: 0;
     border: 4px solid #111;
-    /* increased border to stand out more */
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 3px 0 #111;
 }
 
 .avatar-inner {
@@ -127,8 +123,7 @@ html {
     width: 45px;
     height: 45px;
     background-color: #d8c3fa;
-    /* lighter purple for the avatar shape inside */
-    border-radius: 50%;
+    border-radius: 0;
     border-right: 1px solid #111;
     border-top: 1px solid #111;
 }
@@ -172,11 +167,11 @@ html {
 .header-currency {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 2px solid #2b1704;
-    border-radius: 20px;
+    background-color: #2b1704;
+    border: 3px solid #111;
+    border-radius: 0;
     padding: 4px 12px 4px 6px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 #111;
 }
 
 .currency-icon {
@@ -212,8 +207,7 @@ html {
     width: 35px;
     height: 4px;
     background-color: #111;
-    /* Reverted to dark */
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 /* --- Main content side navigation styling --- */
@@ -235,69 +229,57 @@ html {
 }
 
 .nav-btn {
-    background: linear-gradient(180deg, #ffe285 0%, #d1a550 100%);
+    background-color: #d1a550;
     color: #2b1704;
     font-family: 'Anton', sans-serif;
     font-size: 32px;
     letter-spacing: 2px;
     border: 4px solid #2b1704;
     padding: 15px 30px 15px 40px;
-    border-radius: 0 15px 40px 0;
+    border-radius: 0;
     cursor: pointer;
-    box-shadow: 4px 6px 0px #2b1704, inset 2px 2px 5px rgba(255, 255, 255, 0.7);
-    transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+    box-shadow: 5px 5px 0 #2b1704;
+    transition: transform 0.08s, box-shadow 0.08s;
     text-align: left;
     width: 250px;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
 }
 
 .nav-btn.character-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #d1a550 100%);
-}
-
-.nav-btn.character-btn:hover {
-    background: linear-gradient(180deg, #F2E6D8 0%, #e8ba60 100%);
+    background-color: #d1a550;
 }
 
 .nav-btn.quest-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #2785c2 100%);
-}
-
-.nav-btn.quest-btn:hover {
-    background: linear-gradient(180deg, #F2E6D8 0%, #2785c2 100%);
+    background-color: #2785c2;
+    color: #fff;
+    text-shadow: 2px 2px 0 #0a2e4a;
+    border-color: #0a2e4a;
+    box-shadow: 5px 5px 0 #0a2e4a;
 }
 
 .nav-btn.guild-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #762da8 100%);
-}
-
-.nav-btn.guild-btn:hover {
-    background: linear-gradient(180deg, #F2E6D8 0%, #8b3dc4 100%);
+    background-color: #762da8;
+    color: #fff;
+    text-shadow: 2px 2px 0 #2a0a50;
+    border-color: #2a0a50;
+    box-shadow: 5px 5px 0 #2a0a50;
 }
 
 .nav-btn.shop-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #2f8c2f 100%);
-}
-
-.nav-btn.shop-btn:hover {
-    background: linear-gradient(180deg, #F2E6D8 0%, #2f8c2f 100%);
-}
-
-.nav-btn.friends-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #d87b27 100%);
-}
-
-.nav-btn.friends-btn:hover {
-    background: linear-gradient(180deg, #F2E6D8 0%, #f08b2e 100%);
+    background-color: #2f8c2f;
+    color: #fff;
+    text-shadow: 2px 2px 0 #0a3a0a;
+    border-color: #0a3a0a;
+    box-shadow: 5px 5px 0 #0a3a0a;
 }
 
 .nav-btn:hover {
-    transform: translateX(10px);
+    transform: translateX(6px);
 }
 
 .nav-btn:active {
-    transform: translateX(4px) translateY(4px);
-    box-shadow: 0px 2px 0px #2b1704, inset 2px 2px 5px rgba(255, 255, 255, 0.7);
+    transform: translateX(3px) translateY(3px);
+    box-shadow: 2px 2px 0 #2b1704;
 }
 
 /* --- Bottom bar styling --- */
@@ -358,45 +340,48 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+    transition: transform 0.08s, box-shadow 0.08s;
     border: 4px solid #2b1704;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .bottom-btn:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
 }
 
 /* Left button styles (Inventory) */
 .inventory-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #d1a550 100%);
+    background-color: #d1a550;
     width: 15%;
     min-width: 240px;
-    border-radius: 0 40px 0 0;
+    border-radius: 0;
     border-bottom: none;
     border-left: none;
-    box-shadow: 4px -4px 0px #2b1704, inset 2px 2px 5px rgba(255, 255, 255, 0.7);
+    box-shadow: 4px -4px 0 #2b1704;
 }
 
 .inventory-btn:active {
-    transform: translateY(2px) translateX(2px);
-    box-shadow: 2px -2px 0px #2b1704, inset 2px 2px 5px rgba(255, 255, 255, 0.7);
+    transform: translateY(3px) translateX(3px);
+    box-shadow: 1px -1px 0 #2b1704;
 }
 
 /* Right button styles (Play) */
 .play-btn {
-    background: linear-gradient(180deg, #F2E6D8 0%, #7C0A02 100%);
+    background-color: #7C0A02;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000000;
     width: 20%;
     min-width: 240px;
-    border-radius: 40px 0 0 0;
+    border-radius: 0;
     border-bottom: none;
     border-right: none;
-    box-shadow: -4px -4px 0px #2b1704, inset -2px 2px 5px rgba(255, 255, 255, 0.7);
+    border-color: #000000;
+    box-shadow: -4px -4px 0 #000000;
 }
 
 .play-btn:active {
-    transform: translateY(2px) translateX(-2px);
-    box-shadow: -2px -2px 0px #2b1704, inset -2px 2px 5px rgba(255, 255, 255, 0.7);
+    transform: translateY(3px) translateX(-3px);
+    box-shadow: -1px -1px 0 #000000;
 }
 
 /* --- Character Modal Overlay Styling --- */
@@ -406,10 +391,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Create the blurred background effect over the rest of the lobby */
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -427,12 +409,10 @@ html {
     height: 90%;
     max-height: 700px;
     background-color: #d1b48b;
-    /* Tan background */
-    border: 12px solid #a37b56;
-    /* Thick lighter brown outer border */
-    border-radius: 20px;
+    border: 12px solid #2b1704;
+    border-radius: 0;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -494,17 +474,24 @@ html {
     width: 40px;
     height: 40px;
     background-color: #e6e1d1;
-    border: 2px solid #111;
-    border-radius: 12px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .char-close-btn:hover {
-    background-color: #dcdcdc;
+    background-color: #fff3d0;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #2b1704;
+}
+
+.char-close-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704;
 }
 
 /* --- Main Inner Panel (The dark brown bounding box) --- */
@@ -512,14 +499,12 @@ html {
     flex: 1;
     background-color: transparent;
     border: 6px solid #4a2e12;
-    /* Darker brown boundary */
-    border-radius: 12px;
+    border-radius: 0;
     display: flex;
     padding: 10px;
     gap: 10px;
     position: relative;
     z-index: 4;
-    /* Behind the tabs */
     margin-bottom: 10px;
 }
 
@@ -527,10 +512,8 @@ html {
 .char-left-pane {
     flex: 1.2;
     background-color: #e0ac58;
-    /* Warm gold/tan inner backdrop */
-    border-radius: 8px;
-    border: 2px solid #111;
-    /* subtle inner border if desired, or none */
+    border-radius: 0;
+    border: 3px solid #2b1704;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -557,9 +540,9 @@ html {
     width: 60px;
     height: 80px;
     background-color: #a37b56;
-    border: 2px solid #4a2e12;
-    border-radius: 8px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 3px solid #4a2e12;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .char-name-display {
@@ -584,18 +567,20 @@ html {
     font-size: 18px;
     letter-spacing: 1px;
     padding: 5px 15px;
-    border-radius: 8px;
+    border-radius: 0;
     margin-bottom: 5px;
     margin-left: 10px;
     display: inline-block;
     align-self: flex-start;
+    text-shadow: 2px 2px 0 #000;
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .pane-header.bag-header {
     width: 100%;
     margin-left: 0;
     margin-bottom: 10px;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0;
     padding-left: 20px;
     display: flex;
     align-items: center;
@@ -609,11 +594,10 @@ html {
 .item-grid-container {
     flex: 1;
     background-color: #d1b48b;
-    border-radius: 8px;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
     position: relative;
-    /* ensure the background flows nicely if full-width header */
 }
 
 /* Inner Tabs inside the grid */
@@ -627,32 +611,31 @@ html {
 
 .grid-tab {
     background-color: #a37b56;
-    color: #111;
+    color: #fff;
     font-family: 'Russo One', sans-serif;
     font-size: 12px;
     font-weight: bold;
     padding: 6px 20px 6px 15px;
-    border: 1px solid #111;
+    border: 2px solid #2b1704;
     border-bottom: none;
     cursor: pointer;
     clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
     margin-right: -5px;
+    text-shadow: 1px 1px 0 #2b1704;
 }
 
 .grid-tab.active {
-    background-color: #dcdcdc;
-    /* Light grey when active */
+    background-color: #d1a550;
+    color: #fff;
 }
 
 /* Base Grid container */
 .items-grid {
     flex: 1;
     background-color: #e6e1d1;
-    /* Light grey/tan grid area */
     border: 4px solid #4a2e12;
-    border-radius: 8px;
+    border-radius: 0;
     margin-top: -1px;
-    /* Overlap the tabs */
     padding: 15px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -669,16 +652,13 @@ html {
 
 .grid-slot {
     background-color: #a37b56;
-    /* Darker brown empty slot */
-    border: 2px solid #856140;
-    /* Slightly darker border for depth */
-    border-radius: 8px;
-    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 3px solid #2b1704;
+    border-radius: 0;
+    box-shadow: 3px 3px 0 #2b1704;
     cursor: pointer;
-    transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out, background-color 0.1s;
+    transition: transform 0.08s, box-shadow 0.08s;
     outline: none;
     padding: 0;
-    /* To allow centering of future item images inside */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -686,17 +666,13 @@ html {
 
 .grid-slot:hover {
     background-color: #b58d68;
-    /* Slightly lighter on hover */
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    /* Lift up effect */
-    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #2b1704;
 }
 
 .grid-slot:active {
-    transform: scale(0.95) translateY(0);
-    /* Press down effect */
-    box-shadow: inset 0 6px 8px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.1);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704;
     background-color: #926a45;
 }
 
@@ -709,7 +685,7 @@ html {
     background-color: #e6e1d1;
     border: 4px solid #4a2e12;
     border-top: none;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -733,50 +709,49 @@ html {
     width: 25px;
     height: 25px;
     background-color: #a37b56;
-    color: #111;
-    border: none;
-    border-radius: 50%;
+    color: #fff;
+    border: 2px solid #2b1704;
+    border-radius: 0;
     font-family: 'Russo One', sans-serif;
     font-size: 12px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 2px 2px 0 #2b1704;
 }
 
 .page-num.active {
     background-color: #4cd137;
-    /* Green active page */
     color: #111;
+    border-color: #1d6e12;
+    box-shadow: 2px 2px 0 #1d6e12;
 }
 
 .page-dots {
     background-color: #a37b56;
-    color: #111;
+    color: #fff;
     padding: 2px 8px;
-    border-radius: 10px;
+    border-radius: 0;
     font-weight: bold;
     font-size: 10px;
+    border: 2px solid #2b1704;
 }
 
 /* --- Bottom Equipment Bar --- */
 .char-equipment-bar {
     background-color: #e1c8a3;
-    /* Light tan fill */
     border: 6px solid #3c240c;
-    /* Very dark brown outer border */
-    border-radius: 12px;
+    border-radius: 0;
     padding: 4px;
-    /* Space between dark border and inner gold border */
     position: relative;
     margin-top: 15px;
+    box-shadow: 4px 4px 0 #2b1704;
 }
 
 .equip-header {
     background-color: #3c240c;
-    /* Matches the dark border */
     color: #f7da64;
-    /* Soft yellow text */
     font-family: 'Anton', sans-serif;
     font-size: 15px;
     letter-spacing: 1px;
@@ -784,34 +759,32 @@ html {
     top: -24px;
     left: -6px;
     padding: 2px 35px 2px 15px;
-    border-radius: 12px 0 0 0;
+    border-radius: 0;
     clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 0 100%);
     height: 24px;
     display: flex;
     align-items: center;
+    text-shadow: 2px 2px 0 #000;
 }
 
 .equip-slots {
     border: 3px solid #cb9641;
-    /* Inner golden-brown frame */
-    border-radius: 10px;
+    border-radius: 0;
     display: flex;
     gap: 6px;
     justify-content: space-between;
     padding: 6px;
-    /* Space between the slots and the inner golden frame */
 }
 
 .equip-slot {
     flex: 1;
     height: 75px;
     background-color: #8f7457;
-    /* Dark grayish-brown slot top */
-    border-radius: 12px 12px 8px 8px;
+    border-radius: 0;
+    border: 2px solid #2b1704;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5);
-    /* Inner shadow for depth */
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .slot-num {
@@ -821,7 +794,6 @@ html {
     width: 100%;
     height: 22px;
     background-color: #cc8d34;
-    /* Rich golden-orange bottom strip */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -829,7 +801,6 @@ html {
     font-size: 11px;
     color: #0b0b0b;
     border-top: 2px solid #6b4d32;
-    /* Separation line */
 }
 
 /* --- Settings Modal Styling --- */
@@ -839,9 +810,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -867,11 +836,9 @@ html {
     width: 100%;
     height: 100%;
     background-color: #cca468;
-    /* Light brown/tan background matching reference */
-    border-radius: 12px;
-    border: 8px solid #f2edd3;
-    /* Off-white outer border */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border-radius: 0;
+    border: 8px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     padding: 6px;
     box-sizing: border-box;
 }
@@ -881,7 +848,7 @@ html {
     width: 100%;
     height: 100%;
     border: 6px solid #483318;
-    border-radius: 8px;
+    border-radius: 0;
     display: flex;
     padding: 10px;
     gap: 10px;
@@ -894,16 +861,16 @@ html {
     left: 50%;
     transform: translateX(-50%);
     background-color: #4a2e00;
-    /* Darker brown */
     color: #ffdf60;
     font-family: 'Anton', sans-serif;
     font-size: 36px;
     letter-spacing: 2px;
     padding: 5px 35px;
-    border-radius: 16px;
+    border-radius: 0;
     border: 4px solid #3c240c;
     z-index: 15;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 0 #2b1704;
+    text-shadow: 2px 2px 0 #000;
 }
 
 /* The 'X' Close Button protruding from top right corner */
@@ -914,25 +881,25 @@ html {
     width: 50px;
     height: 50px;
     background-color: #f2edd3;
-    border-radius: 14px;
-    border: none;
+    border-radius: 0;
+    border: 4px solid #2b1704;
     cursor: pointer;
     z-index: 20;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    transform: rotate(6deg);
-    transition: transform 0.1s, filter 0.1s;
+    box-shadow: 4px 4px 0 #2b1704;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .settings-close-icon:hover {
-    filter: brightness(1.1);
-    transform: rotate(6deg) scale(1.05);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 #2b1704;
 }
 
 .settings-close-icon:active {
-    transform: rotate(0deg) scale(0.95);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #2b1704;
 }
 
 /* Left Sidebar containing the menus */
@@ -948,7 +915,6 @@ html {
 /* The tab items */
 .settings-tab {
     background-color: #53350c;
-    /* Very dark rich brown */
     color: #ffdf60;
     font-family: 'Anton', sans-serif;
     font-size: 26px;
@@ -956,20 +922,20 @@ html {
     padding: 8px 10px;
     text-align: center;
     border: 4px solid #301f05;
-    border-radius: 12px;
+    border-radius: 0;
     cursor: pointer;
     transition: background-color 0.1s;
     text-transform: uppercase;
+    box-shadow: 4px 4px 0 #301f05;
+    text-shadow: 2px 2px 0 #000;
 }
 
-/* Active Tab Styles */
 .settings-tab.active {
     background-color: #e0d9ca;
-    /* light grey/beige */
     color: #111;
-    border: 4px solid #854fd6;
-    /* Distinct purple border exactly like reference */
-    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    border: 4px solid #2b1704;
+    box-shadow: 4px 4px 0 #2b1704;
+    text-shadow: none;
 }
 
 .settings-tab:hover:not(.active) {
@@ -980,43 +946,40 @@ html {
 .settings-content-area {
     flex: 1;
     background-color: #d1ccbf;
-    /* accurate greyish/beige color */
-    border-radius: 12px;
-    border: 3px solid #bba37b;
-    /* subtle inner stroke */
+    border-radius: 0;
+    border: 3px solid #2b1704;
     position: relative;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* Red Logout Button */
 .settings-logout-btn {
     position: absolute;
     bottom: 20px;
     right: 20px;
     background-color: #cf5b5b;
-    /* Soft red */
-    color: #111;
+    color: #fff;
     font-family: 'Anton', sans-serif;
     font-size: 20px;
     padding: 5px 25px;
-    border-radius: 20px;
-    /* Pill shaped */
-    border: 3px solid #9c4040;
+    border-radius: 0;
+    border: 3px solid #7a2020;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: filter 0.1s, transform 0.1s;
+    box-shadow: 4px 4px 0 #7a2020;
+    text-shadow: 2px 2px 0 #3a0000;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .settings-logout-btn:hover {
-    filter: brightness(1.1);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 #7a2020;
 }
 
 .settings-logout-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #7a2020;
 }
 
 /* Hiding Panes */
@@ -1030,7 +993,6 @@ html {
     display: none;
 }
 
-/* Standardizing content options inside */
 .settings-option {
     display: flex;
     width: 80%;
@@ -1038,35 +1000,37 @@ html {
     justify-content: space-between;
     align-items: center;
     background-color: #e5d8c6;
-    border: 2px solid #b8a081;
-    border-radius: 8px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     padding: 10px 20px;
     font-family: 'Russo One', sans-serif;
     font-size: 20px;
     color: #333;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .toggle-btn {
     background-color: #4cd137;
     color: #111;
-    border: 2px solid #2e7d32;
+    border: 3px solid #1d6e12;
     padding: 5px 20px;
-    border-radius: 8px;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 #1d6e12;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .toggle-btn.off {
-    background-color: #ff1111;
-    border-color: #a00;
+    background-color: #e03030;
+    border-color: #7a0000;
+    box-shadow: 3px 3px 0 #7a0000;
 }
 
 .toggle-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #1d6e12;
 }
 
 /* Button Group for Quality Settings */
@@ -1077,21 +1041,29 @@ html {
 
 .choice-btn {
     background-color: #a37b56;
-    color: #111;
-    border: 2px solid #4a2e12;
+    color: #fff;
+    border: 3px solid #2b1704;
     padding: 5px 10px;
-    border-radius: 6px;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 #2b1704;
+    text-shadow: 1px 1px 0 #000;
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.choice-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704;
 }
 
 .choice-btn.active {
     background-color: #4cd137;
-    /* Green highlight like the toggle */
     color: #111;
-    border-color: #2e7d32;
+    border-color: #1d6e12;
+    box-shadow: 3px 3px 0 #1d6e12;
+    text-shadow: none;
 }
 
 /* Range Slider */
@@ -1101,8 +1073,8 @@ html {
     width: 150px;
     height: 10px;
     background: #a37b56;
-    border: 2px solid #4a2e12;
-    border-radius: 5px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     outline: none;
 }
 
@@ -1111,25 +1083,24 @@ html {
     appearance: none;
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+    border-radius: 0;
     background: #ffdf60;
-    border: 2px solid #4a2e00;
+    border: 3px solid #2b1704;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 0 #2b1704;
 }
 
 /* Keybind Button */
 .keybind-btn {
     background-color: #dcdcdc;
-    /* whitish */
     color: #111;
-    border: 2px solid #555;
+    border: 3px solid #2b1704;
     padding: 5px 20px;
-    border-radius: 8px;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 #2b1704;
     min-width: 80px;
     text-align: center;
 }
@@ -1138,13 +1109,13 @@ html {
 .styled-select {
     background-color: #dcdcdc;
     color: #111;
-    border: 2px solid #555;
+    border: 3px solid #2b1704;
     padding: 5px 10px;
-    border-radius: 8px;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 0 #2b1704;
     outline: none;
 }
 
@@ -1155,9 +1126,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1171,19 +1140,14 @@ html {
 .profile-modal-content {
     position: relative;
     width: 600px;
-    /* Made modal bigger */
     background-color: #efe3ce;
-    /* Matched image background closer */
-    border-radius: 12px;
-    border: 6px solid #483318;
-    /* Dark brown border */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border-radius: 0;
+    border: 8px solid #2b1704;
+    box-shadow: 8px 8px 0 #2b1704;
     padding: 35px;
-    /* Increased padding */
     display: flex;
     flex-direction: column;
     gap: 25px;
-    /* Increased gap */
 }
 
 /* Redefining close button position for Profile Modal without wrapper */
@@ -1199,20 +1163,20 @@ html {
     gap: 20px;
     background-color: #d2c1aa;
     padding: 15px;
-    border-radius: 10px;
-    border: 3px solid #b8a081;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    border: 3px solid #2b1704;
+    box-shadow: 4px 4px 0 #2b1704;
 }
 
 .profile-avatar-large {
     width: 100px;
     height: 100px;
     background-color: #633af2;
-    border-radius: 50%;
+    border-radius: 0;
     border: 4px solid #111;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 0 #111;
 }
 
 .avatar-inner-large {
@@ -1222,7 +1186,7 @@ html {
     width: 75px;
     height: 75px;
     background-color: #d8c3fa;
-    border-radius: 50%;
+    border-radius: 0;
     border-right: 2px solid #111;
     border-top: 2px solid #111;
 }
@@ -1250,25 +1214,27 @@ html {
 .edit-name-btn {
     background-color: #d1b48b;
     color: #483318;
-    border: 2px solid #483318;
-    border-radius: 8px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     width: 32px;
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s, background-color 0.1s;
+    box-shadow: 3px 3px 0 #2b1704;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .edit-name-btn:hover {
     background-color: #e5d8c6;
-    transform: scale(1.05);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #2b1704;
 }
 
 .edit-name-btn:active {
-    transform: scale(0.95);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704;
 }
 
 .profile-rank-large {
@@ -1302,10 +1268,11 @@ html {
     background-color: #483318;
     color: #ffda75;
     padding: 15px 10px;
-    border-radius: 8px;
+    border-radius: 0;
     text-align: center;
-    border: 3px solid #301f05;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 3px solid #2b1704;
+    box-shadow: 4px 4px 0 #2b1704;
+    text-shadow: 2px 2px 0 #000;
 }
 
 .stat-title {
@@ -1326,8 +1293,9 @@ html {
 .profile-badges-section {
     background-color: #d2c1aa;
     padding: 15px;
-    border-radius: 10px;
-    border: 3px solid #b8a081;
+    border-radius: 0;
+    border: 3px solid #2b1704;
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .badge-title {
@@ -1348,13 +1316,13 @@ html {
     width: 50px;
     height: 50px;
     background-color: #e5d8c6;
-    border: 2px solid #b8a081;
-    border-radius: 8px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .badge-slot.empty {
@@ -1368,14 +1336,11 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 200;
-    /* above profile modal */
 }
 
 .change-name-overlay.hidden {
@@ -1384,11 +1349,11 @@ html {
 
 .change-name-content {
     background-color: #d1b48b;
-    border: 4px solid #483318;
-    border-radius: 12px;
+    border: 6px solid #2b1704;
+    border-radius: 0;
     padding: 30px;
     width: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    box-shadow: 8px 8px 0 #2b1704;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1408,17 +1373,19 @@ html {
     padding: 12px 15px;
     font-family: 'Anton', sans-serif;
     font-size: 20px;
-    border: 3px solid #483318;
-    border-radius: 8px;
+    border: 4px solid #2b1704;
+    border-radius: 0;
     background-color: #f4ecd8;
     color: #111;
     outline: none;
     box-sizing: border-box;
     text-align: center;
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .change-name-input:focus {
-    border-color: #633af2;
+    border-color: #2785c2;
+    box-shadow: 3px 3px 0 #2785c2;
 }
 
 .change-name-notice {
@@ -1456,32 +1423,36 @@ html {
     padding: 12px;
     font-family: 'Russo One', sans-serif;
     font-size: 16px;
-    border: 3px solid #301f05;
-    border-radius: 8px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     cursor: pointer;
-    transition: transform 0.1s, filter 0.1s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .change-name-btn.cancel {
     background-color: #c94c4c;
     color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 2px 2px 0 #3a0000;
+    border-color: #7a2020;
+    box-shadow: 4px 4px 0 #7a2020;
 }
 
 .change-name-btn.confirm {
     background-color: #6da34d;
     color: #fff;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 2px 2px 0 #1d4a0e;
+    border-color: #1d4a0e;
+    box-shadow: 4px 4px 0 #1d4a0e;
 }
 
 .change-name-btn:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
+    filter: brightness(1.08);
+    transform: translate(-1px, -1px);
 }
 
 .change-name-btn:active {
-    transform: translateY(2px);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704 !important;
 }
 
 /* --- Friends Modal Specifics --- */
@@ -1506,41 +1477,44 @@ html {
     flex: 1;
     padding: 12px 15px;
     background-color: #f4f1e6;
-    border: 3px solid #4a2e12;
-    border-radius: 8px;
+    border: 4px solid #2b1704;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 18px;
     color: #4a2e12;
     outline: none;
+    box-shadow: 3px 3px 0 #2b1704;
 }
 
 .friends-search-bar button {
     padding: 8px 25px;
-    background: linear-gradient(180deg, #6da34d 0%, #3e6d23 100%);
+    background-color: #6da34d;
     color: #fff;
-    border: 3px solid #2b1704;
-    border-radius: 8px;
+    border: 4px solid #1d4a0e;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 4px 0 #2b1704;
-    text-shadow: 1px 1px 0 #000;
+    box-shadow: 4px 4px 0 #1d4a0e;
+    text-shadow: 2px 2px 0 #0a2a00;
+    transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .friends-search-bar button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 #2b1704;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #1d4a0e;
 }
 
 .friends-results-container {
     width: 100%;
     max-width: 600px;
     background-color: #d1b48b;
-    border: 3px solid #4a2e12;
-    border-radius: 12px;
+    border: 4px solid #2b1704;
+    border-radius: 0;
     padding: 15px;
     max-height: 300px;
     overflow-y: auto;
+    box-shadow: 4px 4px 0 #2b1704;
 }
 
 .friends-results-container.hidden {
@@ -1551,11 +1525,12 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e6e1d1;
+    background-color: #f0ead8;
     padding: 10px 15px;
-    border: 2px solid #4a2e12;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border: 3px solid #2b1704;
+    border-radius: 0;
+    margin-bottom: 8px;
+    box-shadow: 3px 3px 0 #2b1704;
     animation: popIn 0.3s ease-out forwards;
 }
 
@@ -1569,13 +1544,14 @@ html {
     width: 40px;
     height: 40px;
     background-color: #633af2;
-    border: 2px solid #111;
-    border-radius: 50%;
+    border: 3px solid #111;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     font-size: 20px;
+    box-shadow: 2px 2px 0 #111;
 }
 
 .result-username {
@@ -1586,12 +1562,26 @@ html {
 
 .add-friend-btn {
     padding: 6px 15px;
-    background: linear-gradient(180deg, #f7da64 0%, #d87b27 100%);
-    border: 2px solid #2b1704;
-    border-radius: 6px;
+    background-color: #d1a550;
+    border: 3px solid #2b1704;
+    border-radius: 0;
     font-family: 'Anton', sans-serif;
     font-size: 16px;
     cursor: pointer;
+    box-shadow: 3px 3px 0 #2b1704;
+    color: #2b1704;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.add-friend-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #2b1704;
+}
+
+.add-friend-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #2b1704;
 }
 
 .no-results-text {
@@ -1635,4 +1625,561 @@ html {
     color: #8e6c46;
     max-width: 300px;
     margin: 0 auto;
+}
+
+.friends-pane {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notification-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e03030;
+    color: white;
+    border-radius: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    font-family: 'Russo One', sans-serif;
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    border: 2px solid #3c240c;
+    box-shadow: 2px 2px 0 #3c240c;
+}
+
+.notification-badge.hidden {
+    display: none;
+}
+
+/* --- Floating Friends Button --- */
+.floating-friends-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #d87b27;
+    border: 4px solid #3c240c;
+    border-right: none;
+    border-radius: 0;
+    padding: 12px 10px 12px 16px;
+    cursor: pointer;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -4px 4px 0 #2b1704;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.floating-friends-btn:hover {
+    background-color: #f08b2e;
+    transform: translateY(-50%) translateX(-4px);
+    box-shadow: -5px 5px 0 #2b1704;
+}
+
+.floating-friends-btn:active {
+    transform: translateY(-50%) translateX(2px);
+    box-shadow: -2px 2px 0 #2b1704;
+}
+
+#floatingRequestsBadge {
+    top: -6px;
+    left: -6px;
+    right: auto;
+}
+
+/* ============================================
+   QUEST MODAL STYLES - 2D Retro RPG Vibes
+   Primary color: #2785c2
+   ============================================ */
+
+/* Quest modal: flat solid blue background, chunky border */
+.quest-modal-content {
+    background-color: #c8dff0;
+    border: 12px solid #0f4a78;
+    box-shadow: 6px 6px 0px #0a2e4a;
+}
+
+/* Header bar: flat solid blue, no gradient */
+.quest-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2785c2;
+    padding: 10px 20px;
+    margin-bottom: 4px;
+    border-bottom: 4px solid #0f4a78;
+    border-radius: 0;
+}
+
+.quest-modal-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: #fff;
+    text-shadow: 3px 3px 0px #0a2e4a;
+    display: flex;
+    align-items: center;
+}
+
+.quest-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quest-reset-info {
+    font-family: 'Russo One', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    background-color: #0f4a78;
+    border: 3px solid #0a2e4a;
+    border-radius: 0;
+    padding: 4px 12px;
+    box-shadow: 3px 3px 0px #0a2e4a;
+    letter-spacing: 1px;
+}
+
+.quest-reset-info span {
+    color: #ffd84d;
+    font-weight: bold;
+}
+
+/* Tab row: 2D flat tabs matching the existing lobby style */
+.quest-tabs {
+    padding-left: 10px;
+}
+
+.quest-tabs .char-tab {
+    background-color: #a5c8e8;
+    color: #0f4a78;
+    border: 3px solid #0f4a78;
+    font-size: 16px;
+    text-shadow: none;
+}
+
+.quest-tabs .char-tab.active {
+    background-color: #2785c2;
+    color: #fff;
+    text-shadow: 2px 2px 0px #0a2e4a;
+    border-color: #0f4a78;
+}
+
+.quest-tabs .char-tab:hover:not(.active) {
+    background-color: #7eb8dc;
+    color: #0a2e4a;
+}
+
+/* Quest body: flat dark blue solid, chunky inner border */
+.quest-body {
+    flex: 1;
+    border: 5px solid #0f4a78;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #daeaf7;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 4;
+    margin-bottom: 10px;
+    box-shadow: inset 3px 3px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* Individual tab pane */
+.quest-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    overflow-y: auto;
+    gap: 8px;
+}
+
+.quest-pane::-webkit-scrollbar {
+    width: 8px;
+}
+
+.quest-pane::-webkit-scrollbar-track {
+    background: #a5c8e8;
+    border-left: 2px solid #0f4a78;
+}
+
+.quest-pane::-webkit-scrollbar-thumb {
+    background: #2785c2;
+    border: 2px solid #0f4a78;
+    border-radius: 0;
+}
+
+/* ---- Top Progress Summary ---- */
+.quest-pane-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #2785c2;
+    border: 4px solid #0f4a78;
+    border-radius: 0;
+    padding: 10px 16px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 0px #0a2e4a;
+}
+
+.quest-daily-progress-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.quest-daily-label {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 2px 2px 0px #0a2e4a;
+}
+
+.quest-daily-bar-outer {
+    height: 14px;
+    background-color: #0f4a78;
+    border: 3px solid #0a2e4a;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.quest-daily-bar-fill {
+    height: 100%;
+    background-color: #ffd84d;
+    border-right: 2px solid #c9950a;
+    transition: width 0.5s ease;
+}
+
+.quest-daily-count {
+    font-family: 'Russo One', sans-serif;
+    font-size: 12px;
+    color: #ffd84d;
+    text-shadow: 1px 1px 0px #0a2e4a;
+    letter-spacing: 1px;
+}
+
+.quest-daily-reward-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background-color: #0f4a78;
+    border: 3px solid #0a2e4a;
+    border-radius: 0;
+    padding: 8px 14px;
+    min-width: 140px;
+    box-shadow: 3px 3px 0px #0a2e4a;
+}
+
+.quest-reward-label {
+    font-family: 'Anton', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #ffd84d;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.quest-reward-items {
+    display: flex;
+    gap: 8px;
+}
+
+.quest-reward-item {
+    font-family: 'Russo One', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    background-color: #2785c2;
+    border: 2px solid #a5c8e8;
+    border-radius: 0;
+    padding: 2px 8px;
+    text-shadow: 1px 1px 0px #000;
+}
+
+/* ---- Quest List ---- */
+.quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+/* ---- Individual Quest Card ---- */
+.quest-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #f0f8ff;
+    border: 4px solid #0f4a78;
+    border-radius: 0;
+    padding: 10px 14px;
+    transition: transform 0.08s, box-shadow 0.08s;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 0px #0a2e4a;
+}
+
+.quest-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #0a2e4a;
+}
+
+.quest-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #0a2e4a;
+}
+
+/* Completed card: green flat style */
+.quest-card-done {
+    background-color: #e8f8ec;
+    border-color: #1a7a38;
+    box-shadow: 4px 4px 0px #0d4a22;
+}
+
+.quest-card-done:hover {
+    box-shadow: 6px 6px 0px #0d4a22;
+}
+
+/* Locked card: grey out */
+.quest-card-locked {
+    background-color: #d8dde3;
+    border-color: #7a8a99;
+    opacity: 0.75;
+    box-shadow: 4px 4px 0px #4a5a6a;
+}
+
+.quest-card-locked:hover {
+    transform: none;
+    box-shadow: 4px 4px 0px #4a5a6a;
+}
+
+/* Quest icon: flat solid square, no circle */
+.quest-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    border: 3px solid #0f4a78;
+    box-shadow: 3px 3px 0px #0a2e4a;
+}
+
+.quest-icon-fight {
+    background-color: #2785c2;
+    border-color: #0f4a78;
+    box-shadow: 3px 3px 0px #0a2e4a;
+}
+
+.quest-icon-done {
+    background-color: #27ae60;
+    border-color: #1a7a38;
+    box-shadow: 3px 3px 0px #0d4a22;
+}
+
+.quest-icon-locked {
+    background-color: #8a9aaa;
+    border-color: #4a5a6a;
+    box-shadow: 3px 3px 0px #2a3a4a;
+}
+
+.quest-icon-story {
+    background-color: #7b52c8;
+    border-color: #4a2a8a;
+    box-shadow: 3px 3px 0px #2a1a5a;
+}
+
+/* Quest text body */
+.quest-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quest-card-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #0a2e4a;
+    text-shadow: none;
+}
+
+.quest-card-desc {
+    font-family: 'Russo One', sans-serif;
+    font-size: 11px;
+    color: #3a6a8a;
+    line-height: 1.3;
+}
+
+/* Progress bar: flat, no glow */
+.quest-progress-bar-outer {
+    height: 10px;
+    background-color: #a5c8e8;
+    border: 2px solid #0f4a78;
+    border-radius: 0;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.quest-progress-bar-fill {
+    height: 100%;
+    background-color: #2785c2;
+    border-right: 2px solid #0f4a78;
+    transition: width 0.4s ease;
+}
+
+.quest-bar-done {
+    background-color: #27ae60;
+    border-right-color: #1a7a38;
+}
+
+.quest-progress-label {
+    font-family: 'Russo One', sans-serif;
+    font-size: 10px;
+    color: #2785c2;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+}
+
+.quest-progress-done {
+    color: #1a7a38;
+    font-weight: bold;
+}
+
+/* Quest right side: rewards + button */
+.quest-card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 88px;
+    flex-shrink: 0;
+}
+
+.quest-card-reward {
+    font-family: 'Russo One', sans-serif;
+    font-size: 11px;
+    color: #0a2e4a;
+    background-color: #a5c8e8;
+    border: 2px solid #0f4a78;
+    border-radius: 0;
+    padding: 2px 8px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 2px 2px 0px #0a2e4a;
+}
+
+/* Quest action buttons: classic pressed 2D button */
+.quest-action-btn {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border-radius: 0;
+    cursor: pointer;
+    padding: 6px 10px;
+    width: 100%;
+    margin-top: 4px;
+    transition: transform 0.08s, box-shadow 0.08s;
+    border: 3px solid;
+}
+
+.quest-action-btn:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translate(-1px, -1px);
+}
+
+.quest-action-btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px !important;
+}
+
+/* GO / START button: bold blue */
+.quest-btn-active {
+    background-color: #2785c2;
+    border-color: #0a2e4a;
+    color: #fff;
+    text-shadow: 2px 2px 0px #0a2e4a;
+    box-shadow: 4px 4px 0px #0a2e4a;
+}
+
+/* CLAIM button: flat green, no pulse glow — bouncing shadow instead */
+.quest-btn-claim {
+    background-color: #27ae60;
+    border-color: #0d4a22;
+    color: #fff;
+    text-shadow: 2px 2px 0px #0d4a22;
+    box-shadow: 4px 4px 0px #0d4a22;
+    animation: claimBounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes claimBounce {
+    from {
+        transform: translate(0, 0);
+        box-shadow: 4px 4px 0px #0d4a22;
+    }
+
+    to {
+        transform: translate(-1px, -2px);
+        box-shadow: 5px 6px 0px #0d4a22;
+    }
+}
+
+/* LOCKED button: greyed */
+.quest-btn-locked {
+    background-color: #8a9aaa;
+    border-color: #4a5a6a;
+    color: #d8dde3;
+    box-shadow: 3px 3px 0px #2a3a4a;
+    cursor: not-allowed;
+    text-shadow: none;
+}
+
+/* DONE (already claimed) button */
+.quest-btn-claimed {
+    background-color: #daf0e4;
+    border-color: #1a7a38;
+    color: #1a7a38;
+    box-shadow: 3px 3px 0px #0d4a22;
+    cursor: not-allowed;
+    text-shadow: none;
+}
+
+/* ---- Story chapter header ---- */
+.quest-story-chapter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.quest-chapter-badge {
+    font-family: 'Anton', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    background-color: #2785c2;
+    color: #fff;
+    border-radius: 0;
+    padding: 4px 14px;
+    border: 3px solid #0a2e4a;
+    box-shadow: 3px 3px 0px #0a2e4a;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.quest-chapter-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: #0a2e4a;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 }

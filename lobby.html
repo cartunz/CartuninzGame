@@ -49,14 +49,6 @@
         <!-- Main content area with left navigation -->
         <main class="main-content">
             <nav class="side-nav">
-                <button class="nav-btn friends-btn" id="navFriendsBtn">
-                    <svg viewBox="0 0 24 24" width="24" height="24" style="margin-right: 8px; margin-bottom: 2px;">
-                        <path
-                            d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-                            fill="currentColor" />
-                    </svg>
-                    FRIENDS
-                </button>
                 <button class="nav-btn quest-btn" id="navQuestBtn">
                     <svg viewBox="0 0 24 24" width="24" height="24" style="margin-right: 8px; margin-bottom: 2px;">
                         <path
@@ -106,6 +98,16 @@
         </footer>
 
     </div>
+
+    <!-- Floating Friends Tab -->
+    <button class="floating-friends-btn" id="floatingFriendsBtn" title="Friends List">
+        <svg viewBox="0 0 24 24" width="32" height="32">
+            <path
+                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                filter="drop-shadow(0 2px 2px rgba(0,0,0,0.5))" fill="#fff" />
+        </svg>
+        <div class="notification-badge hidden" id="floatingRequestsBadge">!</div>
+    </button>
 
     <!-- Settings Modal Overlay -->
     <div class="settings-modal-overlay hidden" id="settingsModal">
@@ -426,7 +428,371 @@
         </div>
     </div>
 
-    <!-- Coming Soon Modal Overlay -->
+    <!-- Quest Modal Overlay -->
+    <div class="char-modal-overlay hidden" id="questModal">
+        <div class="char-modal-content quest-modal-content">
+
+            <!-- Quest Header: Title + currency display -->
+            <div class="quest-modal-header">
+                <div class="quest-modal-title">
+                    <svg viewBox="0 0 24 24" width="28" height="28" style="margin-right:10px;vertical-align:middle;">
+                        <path
+                            d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M18,7l-1.41-1.41L11,11.17l-1.59-1.59L8,11l3,3L18,7z M12,18l-4-4l1.41-1.41L12,15.17l4.59-4.59L18,12L12,18z"
+                            fill="currentColor" />
+                    </svg>
+                    QUEST BOARD
+                </div>
+                <div class="quest-header-right">
+                    <div class="quest-reset-info" id="questResetTimer">⏱ Resets in: <span>23:41:05</span></div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="char-tabs quest-tabs">
+                <button class="quest-tab char-tab active" data-target="paneQuestDaily">DAILY</button>
+                <button class="quest-tab char-tab" data-target="paneQuestWeekly">WEEKLY</button>
+                <button class="quest-tab char-tab" data-target="paneQuestStory">STORY</button>
+                <button class="char-close-btn" id="questCloseBtn">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="#2a1a08" stroke-width="4"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Quest Body -->
+            <div class="quest-body">
+
+                <!-- DAILY QUESTS PANE -->
+                <div class="quest-pane active-pane" id="paneQuestDaily">
+                    <div class="quest-pane-top">
+                        <div class="quest-daily-progress-bar-wrap">
+                            <div class="quest-daily-label">Daily Progress</div>
+                            <div class="quest-daily-bar-outer">
+                                <div class="quest-daily-bar-fill" style="width: 40%;"></div>
+                            </div>
+                            <div class="quest-daily-count">2 / 5 Completed</div>
+                        </div>
+                        <div class="quest-daily-reward-box">
+                            <div class="quest-reward-label">DAILY BONUS</div>
+                            <div class="quest-reward-items">
+                                <span class="quest-reward-item">💎 50</span>
+                                <span class="quest-reward-item">🪙 500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quest-list" id="questDailyList">
+                        <!-- Quest Card: Active -->
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">⚔️</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Win 3 Matches</div>
+                                <div class="quest-card-desc">Win matches in any game mode</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 66%;"></div>
+                                </div>
+                                <div class="quest-progress-label">2 / 3</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 200</div>
+                                <div class="quest-card-reward"><span>⭐</span> 80 XP</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                        <!-- Quest Card: Completed (Claimable) -->
+                        <div class="quest-card quest-card-done">
+                            <div class="quest-card-icon quest-icon-done">🎯</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Deal 1000 Damage</div>
+                                <div class="quest-card-desc">Deal a total of 1000 damage in any match</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill quest-bar-done" style="width: 100%;"></div>
+                                </div>
+                                <div class="quest-progress-label quest-progress-done">COMPLETED!</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 300</div>
+                                <div class="quest-card-reward"><span>⭐</span> 120 XP</div>
+                                <button class="quest-action-btn quest-btn-claim">CLAIM</button>
+                            </div>
+                        </div>
+                        <!-- Quest Card: Locked -->
+                        <div class="quest-card quest-card-locked">
+                            <div class="quest-card-icon quest-icon-locked">🔒</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Play with a Friend</div>
+                                <div class="quest-card-desc">Complete a match with a friend in your party</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 0%;"></div>
+                                </div>
+                                <div class="quest-progress-label">0 / 1</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 150</div>
+                                <div class="quest-card-reward"><span>⭐</span> 60 XP</div>
+                                <button class="quest-action-btn quest-btn-locked" disabled>LOCKED</button>
+                            </div>
+                        </div>
+                        <!-- Quest Card: Active -->
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">🏆</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Get 5 Kills</div>
+                                <div class="quest-card-desc">Eliminate 5 enemies in a single session</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 20%;"></div>
+                                </div>
+                                <div class="quest-progress-label">1 / 5</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 250</div>
+                                <div class="quest-card-reward"><span>⭐</span> 100 XP</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                        <!-- Quest Card: Active -->
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">🧪</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Use 3 Items</div>
+                                <div class="quest-card-desc">Use any 3 items from your inventory in battle</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 0%;"></div>
+                                </div>
+                                <div class="quest-progress-label">0 / 3</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 100</div>
+                                <div class="quest-card-reward"><span>⭐</span> 40 XP</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WEEKLY QUESTS PANE -->
+                <div class="quest-pane hidden-pane" id="paneQuestWeekly">
+                    <div class="quest-pane-top">
+                        <div class="quest-daily-progress-bar-wrap">
+                            <div class="quest-daily-label">Weekly Progress</div>
+                            <div class="quest-daily-bar-outer">
+                                <div class="quest-daily-bar-fill" style="width: 25%;"></div>
+                            </div>
+                            <div class="quest-daily-count">1 / 4 Completed</div>
+                        </div>
+                        <div class="quest-daily-reward-box">
+                            <div class="quest-reward-label">WEEKLY BONUS</div>
+                            <div class="quest-reward-items">
+                                <span class="quest-reward-item">💎 200</span>
+                                <span class="quest-reward-item">🪙 2000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quest-list">
+                        <div class="quest-card quest-card-done">
+                            <div class="quest-card-icon quest-icon-done">🌟</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Win 10 Matches</div>
+                                <div class="quest-card-desc">Win 10 matches in any mode this week</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill quest-bar-done" style="width: 100%;"></div>
+                                </div>
+                                <div class="quest-progress-label quest-progress-done">COMPLETED!</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 1000</div>
+                                <div class="quest-card-reward"><span>💎</span> 20</div>
+                                <button class="quest-action-btn quest-btn-claim">CLAIM</button>
+                            </div>
+                        </div>
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">🔥</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Deal 10,000 Damage</div>
+                                <div class="quest-card-desc">Deal a total of 10,000 damage this week</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 30%;"></div>
+                                </div>
+                                <div class="quest-progress-label">3,100 / 10,000</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 2000</div>
+                                <div class="quest-card-reward"><span>💎</span> 50</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">🤝</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Play 5 Matches with Friends</div>
+                                <div class="quest-card-desc">Play 5 matches with friends in your party</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 40%;"></div>
+                                </div>
+                                <div class="quest-progress-label">2 / 5</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 800</div>
+                                <div class="quest-card-reward"><span>💎</span> 10</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-fight">🛡️</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">Block 500 Damage</div>
+                                <div class="quest-card-desc">Block or dodge a total of 500 damage</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 10%;"></div>
+                                </div>
+                                <div class="quest-progress-label">50 / 500</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 600</div>
+                                <div class="quest-card-reward"><span>⭐</span> 300 XP</div>
+                                <button class="quest-action-btn quest-btn-active">GO!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORY QUESTS PANE -->
+                <div class="quest-pane hidden-pane" id="paneQuestStory">
+                    <div class="quest-story-chapter">
+                        <div class="quest-chapter-badge">CHAPTER 1</div>
+                        <div class="quest-chapter-title">The Lost Forest</div>
+                    </div>
+                    <div class="quest-list">
+                        <div class="quest-card quest-card-done">
+                            <div class="quest-card-icon quest-icon-done">📜</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">1-1: A New Journey</div>
+                                <div class="quest-card-desc">Complete your first battle in the forest</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill quest-bar-done" style="width: 100%;"></div>
+                                </div>
+                                <div class="quest-progress-label quest-progress-done">COMPLETED!</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>🪙</span> 500</div>
+                                <div class="quest-card-reward"><span>⭐</span> 200 XP</div>
+                                <button class="quest-action-btn quest-btn-claimed" disabled>✓ DONE</button>
+                            </div>
+                        </div>
+                        <div class="quest-card">
+                            <div class="quest-card-icon quest-icon-story">📖</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">1-2: The Forest Guardian</div>
+                                <div class="quest-card-desc">Defeat the Forest Guardian boss</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 0%;"></div>
+                                </div>
+                                <div class="quest-progress-label">0 / 1</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>💎</span> 30</div>
+                                <div class="quest-card-reward"><span>⭐</span> 500 XP</div>
+                                <button class="quest-action-btn quest-btn-active">START</button>
+                            </div>
+                        </div>
+                        <div class="quest-card quest-card-locked">
+                            <div class="quest-card-icon quest-icon-locked">🔒</div>
+                            <div class="quest-card-body">
+                                <div class="quest-card-title">1-3: Deep Into the Dark</div>
+                                <div class="quest-card-desc">Venture deeper into the forest. Complete 1-2 first.</div>
+                                <div class="quest-progress-bar-outer">
+                                    <div class="quest-progress-bar-fill" style="width: 0%;"></div>
+                                </div>
+                                <div class="quest-progress-label">LOCKED</div>
+                            </div>
+                            <div class="quest-card-right">
+                                <div class="quest-card-reward"><span>💎</span> 50</div>
+                                <div class="quest-card-reward"><span>⭐</span> 800 XP</div>
+                                <button class="quest-action-btn quest-btn-locked" disabled>LOCKED</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Modal Overlay -->
+    <div class="char-modal-overlay hidden" id="shopModal">
+        <div class="char-modal-content shop-modal-content">
+
+            <!-- Shop Header for Currency display inside shop -->
+            <div class="shop-header"
+                style="display: flex; justify-content: flex-end; padding: 10px 20px; gap: 15px; background-color: rgba(0,0,0,0.1); border-radius: 10px; margin-bottom: 10px;">
+                <div class="header-currency" style="box-shadow: none;">
+                    <span class="currency-icon">💎</span>
+                    <span class="currency-amount" id="shopDiamondDisplay">0</span>
+                </div>
+                <div class="header-currency" style="box-shadow: none;">
+                    <span class="currency-icon" style="font-size: 1.2rem; transform: translateY(1px);">🪙</span>
+                    <span class="currency-amount" id="shopCoinDisplay">0</span>
+                </div>
+            </div>
+
+            <div class="char-tabs">
+                <button class="shop-tab char-tab active" data-target="paneShopHeroes">HEROES</button>
+                <button class="shop-tab char-tab" data-target="paneShopSkins">SKINS</button>
+                <button class="shop-tab char-tab" data-target="paneShopGadgets">GADGETS</button>
+                <button class="shop-tab char-tab" data-target="paneShopPets">PETS</button>
+                <button class="shop-tab char-tab" data-target="paneShopCurrency">CURRENCY</button>
+
+                <button class="char-close-btn" id="shopCloseBtn">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M5 5L19 19M19 5L5 19" stroke="#3c240c" stroke-width="5" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="char-body">
+                <!-- HEROES PANE -->
+                <div class="char-left-pane shop-pane active-pane" id="paneShopHeroes" style="width: 100%;">
+                    <div class="pane-header shop-category-header">HEROES</div>
+                    <div class="shop-grid" id="shopHeroesGrid">
+                        <!-- Hero cards injected here -->
+                    </div>
+                </div>
+
+                <!-- SKINS PANE -->
+                <div class="char-left-pane shop-pane hidden-pane" id="paneShopSkins" style="width: 100%;">
+                    <div class="pane-header shop-category-header">SKINS</div>
+                    <div class="shop-grid" id="shopSkinsGrid">
+                        <!-- Skin cards injected here -->
+                    </div>
+                </div>
+
+                <!-- GADGETS PANE -->
+                <div class="char-left-pane shop-pane hidden-pane" id="paneShopGadgets" style="width: 100%;">
+                    <div class="pane-header shop-category-header">GADGETS</div>
+                    <div class="shop-grid" id="shopGadgetsGrid">
+                        <!-- Gadget cards injected here -->
+                    </div>
+                </div>
+
+                <!-- PETS PANE -->
+                <div class="char-left-pane shop-pane hidden-pane" id="paneShopPets" style="width: 100%;">
+                    <div class="pane-header shop-category-header">PETS</div>
+                    <div class="shop-grid" id="shopPetsGrid">
+                        <!-- Pet cards injected here -->
+                    </div>
+                </div>
+
+                <!-- CURRENCY PANE -->
+                <div class="char-left-pane shop-pane hidden-pane" id="paneShopCurrency" style="width: 100%;">
+                    <div class="pane-header shop-category-header">CURRENCY</div>
+                    <div class="shop-grid" id="shopCurrencyGrid">
+                        <!-- Currency pack cards injected here -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="change-name-overlay hidden" id="comingSoonModal">
         <div class="change-name-content" style="text-align: center;">
             <h2 class="change-name-title" id="comingSoonTitle">COMING SOON</h2>
@@ -443,7 +809,12 @@
     <div class="char-modal-overlay hidden" id="friendsModal">
         <div class="char-modal-content friends-modal-content">
             <div class="char-tabs">
-                <button class="char-tab active">FRIENDS</button>
+                <button class="friends-tab char-tab active" data-target="paneFriendsList">FRIENDS</button>
+                <button class="friends-tab char-tab" data-target="paneFriendsSearch">SEARCH</button>
+                <button class="friends-tab char-tab" data-target="paneFriendsRequests">
+                    REQUESTS
+                    <span id="requestsBadge" class="notification-badge hidden">!</span>
+                </button>
                 <button class="char-close-btn" id="friendsCloseBtn">
                     <svg viewBox="0 0 24 24" width="24" height="24">
                         <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="#2a1a08" stroke-width="4"
@@ -451,22 +822,69 @@
                     </svg>
                 </button>
             </div>
+
             <div class="char-inner-panel friends-inner-panel">
-                <!-- Search Section -->
-                <div class="friends-search-bar">
-                    <input type="text" id="friendsSearchInput" placeholder="Enter username..." maxlength="12">
-                    <button id="friendsSearchBtn">SEARCH</button>
+                <!-- FRIENDS LIST PANE -->
+                <div id="paneFriendsList" class="friends-pane active-pane">
+                    <div id="friendsListResults" class="friends-results-container hidden"
+                        style="width:100%; max-height: 400px;">
+                        <!-- Friends will be injected here -->
+                    </div>
+                    <div class="friends-empty-state" id="friendsListEmptyState">
+                        <div class="empty-friends-icon">👥</div>
+                        <div class="empty-friends-text">NOFRIENDS YET</div>
+                        <div class="empty-friends-subtext"> Add some friends to play together!</div>
+                    </div>
                 </div>
 
-                <!-- Results Area -->
-                <div id="friendsSearchResults" class="friends-results-container hidden">
-                    <!-- Search results will be injected here -->
+                <!-- SEARCH PANE -->
+                <div id="paneFriendsSearch" class="friends-pane hidden-pane">
+                    <!-- Search Section -->
+                    <div class="friends-search-bar">
+                        <input type="text" id="friendsSearchInput" placeholder="Enter username..." maxlength="12">
+                        <button id="friendsSearchBtn">SEARCH</button>
+                    </div>
+
+                    <!-- Results Area -->
+                    <div id="friendsSearchResults" class="friends-results-container hidden" style="width: 100%;">
+                        <!-- Search results will be injected here -->
+                    </div>
+
+                    <div class="friends-empty-state" id="friendsSearchEmptyState">
+                        <div class="empty-friends-icon">🔍</div>
+                        <div class="empty-friends-text">FIND FRIENDS</div>
+                        <div class="empty-friends-subtext">Search by username to add players</div>
+                    </div>
                 </div>
 
-                <div class="friends-empty-state" id="friendsEmptyState">
-                    <div class="empty-friends-icon">👥</div>
-                    <div class="empty-friends-text">NO FRIENDS YET</div>
-                    <div class="empty-friends-subtext">Add some friends to play together!</div>
+                <!-- REQUESTS PANE -->
+                <div id="paneFriendsRequests" class="friends-pane hidden-pane">
+                    <!-- INCOMING REQUESTS -->
+                    <div class="requests-header"
+                        style="width: 100%; max-width: 600px; margin-bottom: 10px; font-family: 'Anton', sans-serif; font-size: 20px; color: #4a2e12;">
+                        INCOMING REQUESTS</div>
+                    <div id="friendsRequestsResults" class="friends-results-container hidden"
+                        style="width: 100%; margin-bottom: 20px;">
+                        <!-- Friend requests will be injected here -->
+                    </div>
+                    <div class="friends-empty-state" id="friendsRequestsEmptyState" style="margin-bottom: 20px;">
+                        <div class="empty-friends-icon">📬</div>
+                        <div class="empty-friends-text">NO PENDING REQUESTS</div>
+                        <div class="empty-friends-subtext">You have no friend requests at the moment</div>
+                    </div>
+
+                    <!-- OUTGOING REQUESTS -->
+                    <div class="requests-header"
+                        style="width: 100%; max-width: 600px; margin-bottom: 10px; font-family: 'Anton', sans-serif; font-size: 20px; color: #4a2e12;">
+                        OUTGOING REQUESTS</div>
+                    <div id="outgoingRequestsResults" class="friends-results-container hidden" style="width: 100%;">
+                        <!-- Outgoing requests will be injected here -->
+                    </div>
+                    <div class="friends-empty-state" id="outgoingRequestsEmptyState">
+                        <div class="empty-friends-icon">📤</div>
+                        <div class="empty-friends-text">NO OUTGOING REQUESTS</div>
+                        <div class="empty-friends-subtext">You haven't sent any friend requests lately</div>
+                    </div>
                 </div>
             </div>
         </div>

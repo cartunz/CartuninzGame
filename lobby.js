@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lobbyRank = document.querySelector('.user-details .rank');
 
     if (lobbyUsername && activeUser) {
-        lobbyUsername.textContent = activeUser.toUpperCase();
+        lobbyUsername.textContent = (activeUserData.gameName || activeUser).toUpperCase();
         if (lobbyRank) {
             lobbyRank.textContent = `Lv. ${activeUserData.level} ${activeUserData.rank}`;
         }
@@ -59,13 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const comingSoonCloseBtn = document.getElementById('comingSoonCloseBtn');
 
     // Friends Modal Elements
-    const navFriendsBtn = document.getElementById('navFriendsBtn');
+    const floatingFriendsBtn = document.getElementById('floatingFriendsBtn');
     const friendsModal = document.getElementById('friendsModal');
     const friendsCloseBtn = document.getElementById('friendsCloseBtn');
+
+    const friendsTabs = document.querySelectorAll('.friends-tab');
+    const friendsPanes = document.querySelectorAll('.friends-pane');
+
+    // Search Pane Elements
     const friendsSearchInput = document.getElementById('friendsSearchInput');
     const friendsSearchBtn = document.getElementById('friendsSearchBtn');
     const friendsSearchResults = document.getElementById('friendsSearchResults');
-    const friendsEmptyState = document.getElementById('friendsEmptyState');
+    const friendsSearchEmptyState = document.getElementById('friendsSearchEmptyState');
+
+    // Friends List Pane Elements
+    const friendsListResults = document.getElementById('friendsListResults');
+    const friendsListEmptyState = document.getElementById('friendsListEmptyState');
+
+    // Requests Pane Elements
+    const friendsRequestsResults = document.getElementById('friendsRequestsResults');
+    const friendsRequestsEmptyState = document.getElementById('friendsRequestsEmptyState');
+    const outgoingRequestsResults = document.getElementById('outgoingRequestsResults');
+    const outgoingRequestsEmptyState = document.getElementById('outgoingRequestsEmptyState');
+    const requestsBadge = document.getElementById('requestsBadge');
+    const floatingRequestsBadge = document.getElementById('floatingRequestsBadge');
 
     // Dummy array of taken usernames
     const takenUsernames = ['admin', 'guest', 'player1', 'carltunz'];
@@ -98,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         inventoryBtn.addEventListener('click', () => {
             if (charNameDisplay) {
-                charNameDisplay.textContent = activeUser;
+                charNameDisplay.textContent = activeUserData.gameName || activeUser;
             }
             toggleModal(characterModal, true);
 
@@ -123,14 +140,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Quest Modal Logic ---
+    const questModal = document.getElementById('questModal');
+    const questCloseBtn = document.getElementById('questCloseBtn');
+    const questTabs = document.querySelectorAll('.quest-tab');
+    const questPanes = document.querySelectorAll('.quest-pane');
+
+    if (navQuestBtn && questModal && questCloseBtn) {
+        navQuestBtn.addEventListener('click', () => {
+            toggleModal(questModal, true);
+        });
+        questCloseBtn.addEventListener('click', () => {
+            toggleModal(questModal, false);
+        });
+    }
+
+    // Quest Tab Switching
+    if (questTabs.length > 0) {
+        questTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                questTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                questPanes.forEach(pane => {
+                    pane.classList.add('hidden-pane');
+                    pane.classList.remove('active-pane');
+                });
+                const targetId = tab.getAttribute('data-target');
+                if (targetId) {
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.remove('hidden-pane');
+                        targetPane.classList.add('active-pane');
+                    }
+                }
+            });
+        });
+    }
+
     // Open Coming Soon Modal (from side nav)
     if (comingSoonModal && comingSoonCloseBtn && comingSoonTitle) {
-        if (navQuestBtn) {
-            navQuestBtn.addEventListener('click', () => {
-                comingSoonTitle.textContent = 'QUESTS COMING SOON';
-                toggleModal(comingSoonModal, true);
-            });
-        }
         if (navGuildBtn) {
             navGuildBtn.addEventListener('click', () => {
                 comingSoonTitle.textContent = 'GUILD COMING SOON';
@@ -149,17 +197,248 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Open Friends Modal (from side nav)
-    if (navFriendsBtn && friendsModal && friendsCloseBtn) {
-        navFriendsBtn.addEventListener('click', () => {
-            toggleModal(friendsModal, true);
-        });
+    // --- Friends Data Management ---
+    function initializeFriendsData(username) {
+        const savedUsersStr = localStorage.getItem('cartuninz_users');
+        if (savedUsersStr) {
+            const usersMap = JSON.parse(savedUsersStr);
+            if (usersMap[username]) {
+                if (!usersMap[username].friends) usersMap[username].friends = [];
+                if (!usersMap[username].friendRequests) usersMap[username].friendRequests = [];
+                localStorage.setItem('cartuninz_users', JSON.stringify(usersMap));
+            }
+        }
+    }
+
+    // Call it for the active user on load
+    if (activeUser) {
+        initializeFriendsData(activeUser);
+    }
+
+    function getUserData(username) {
+        const savedUsers = JSON.parse(localStorage.getItem('cartuninz_users') || '{}');
+        return savedUsers[username] || null;
+    }
+
+    function saveUserData(username, data) {
+        const savedUsers = JSON.parse(localStorage.getItem('cartuninz_users') || '{}');
+        savedUsers[username] = data;
+        localStorage.setItem('cartuninz_users', JSON.stringify(savedUsers));
+    }
+
+    function renderFriendsList() {
+        const currentUserData = getUserData(activeUser);
+        if (!currentUserData) return;
+
+        const friendsList = currentUserData.friends || [];
+        friendsListResults.innerHTML = '';
+
+        if (friendsList.length > 0) {
+            friendsListResults.classList.remove('hidden');
+            friendsListEmptyState.classList.add('hidden');
+
+            friendsList.forEach(friendUsername => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <div class="result-user-info">
+                        <div class="result-avatar" style="background-color: #3e6d23;">${friendUsername.charAt(0).toUpperCase()}</div>
+                        <div class="result-username">${friendUsername.toUpperCase()}</div>
+                    </div>
+                    <button class="add-friend-btn" style="background: linear-gradient(180deg, #A8A8A8 0%, #606060 100%); pointer-events: none;">FRIENDS</button>
+                `;
+                friendsListResults.appendChild(resultItem);
+            });
+        } else {
+            friendsListResults.classList.add('hidden');
+            friendsListEmptyState.classList.remove('hidden');
+        }
+    }
+
+    function updateRequestsBadge() {
+        const currentUserData = getUserData(activeUser);
+        if (currentUserData && currentUserData.friendRequests && currentUserData.friendRequests.length > 0) {
+            requestsBadge.classList.remove('hidden');
+            if (floatingRequestsBadge) floatingRequestsBadge.classList.remove('hidden');
+        } else {
+            requestsBadge.classList.add('hidden');
+            if (floatingRequestsBadge) floatingRequestsBadge.classList.add('hidden');
+        }
+    }
+
+    function renderFriendRequests() {
+        const currentUserData = getUserData(activeUser);
+        if (!currentUserData) return;
+
+        const requests = currentUserData.friendRequests || [];
+        friendsRequestsResults.innerHTML = '';
+
+        if (requests.length > 0) {
+            friendsRequestsResults.classList.remove('hidden');
+            friendsRequestsEmptyState.classList.add('hidden');
+
+            requests.forEach(requesterUsername => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <div class="result-user-info">
+                        <div class="result-avatar" style="background-color: #d87b27;">${requesterUsername.charAt(0).toUpperCase()}</div>
+                        <div class="result-username">${requesterUsername.toUpperCase()}</div>
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                        <button class="accept-btn" style="padding: 6px 10px; background: linear-gradient(180deg, #6da34d 0%, #3e6d23 100%); border: 2px solid #2b1704; border-radius: 6px; font-family: 'Anton', sans-serif; cursor: pointer; color: white;">ACCEPT</button>
+                        <button class="decline-btn" style="padding: 6px 10px; background: linear-gradient(180deg, #c94c4c 0%, #9c4040 100%); border: 2px solid #2b1704; border-radius: 6px; font-family: 'Anton', sans-serif; cursor: pointer; color: white;">DECLINE</button>
+                    </div>
+                `;
+
+                const acceptBtn = resultItem.querySelector('.accept-btn');
+                const declineBtn = resultItem.querySelector('.decline-btn');
+
+                acceptBtn.onclick = () => {
+                    // Refresh data before modifying to prevent race conditions
+                    const updatedCurrentUser = getUserData(activeUser);
+                    const requesterData = getUserData(requesterUsername);
+
+                    if (updatedCurrentUser && requesterData) {
+                        // Remove from requests
+                        updatedCurrentUser.friendRequests = updatedCurrentUser.friendRequests.filter(name => name !== requesterUsername);
+
+                        // Add to both friends lists
+                        if (!updatedCurrentUser.friends) updatedCurrentUser.friends = [];
+                        if (!updatedCurrentUser.friends.includes(requesterUsername)) {
+                            updatedCurrentUser.friends.push(requesterUsername);
+                        }
+
+                        if (!requesterData.friends) requesterData.friends = [];
+                        if (!requesterData.friends.includes(activeUser)) {
+                            requesterData.friends.push(activeUser);
+                        }
+
+                        // Save
+                        saveUserData(activeUser, updatedCurrentUser);
+                        saveUserData(requesterUsername, requesterData);
+
+                        // Update UI
+                        renderFriendRequests();
+                        updateRequestsBadge();
+                        renderFriendsList();
+                    }
+                };
+
+                declineBtn.onclick = () => {
+                    const updatedCurrentUser = getUserData(activeUser);
+                    if (updatedCurrentUser) {
+                        // Remove from requests
+                        updatedCurrentUser.friendRequests = updatedCurrentUser.friendRequests.filter(name => name !== requesterUsername);
+                        saveUserData(activeUser, updatedCurrentUser);
+
+                        // Update UI
+                        renderFriendRequests();
+                        updateRequestsBadge();
+                    }
+                };
+
+                friendsRequestsResults.appendChild(resultItem);
+            });
+        } else {
+            friendsRequestsResults.classList.add('hidden');
+            friendsRequestsEmptyState.classList.remove('hidden');
+        }
+
+        // OUTGOING REQUESTS
+        // Find all users who have the activeUser in their friendRequests array
+        const savedUsersStr = localStorage.getItem('cartuninz_users');
+        const outgoingRequests = [];
+
+        if (savedUsersStr) {
+            const allUsers = JSON.parse(savedUsersStr);
+            for (const [username, data] of Object.entries(allUsers)) {
+                if (data.friendRequests && data.friendRequests.includes(activeUser)) {
+                    outgoingRequests.push(username);
+                }
+            }
+        }
+
+        outgoingRequestsResults.innerHTML = '';
+        if (outgoingRequests.length > 0) {
+            outgoingRequestsResults.classList.remove('hidden');
+            outgoingRequestsEmptyState.classList.add('hidden');
+
+            outgoingRequests.forEach(targetUsername => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <div class="result-user-info">
+                        <div class="result-avatar" style="background-color: #633af2;">${targetUsername.charAt(0).toUpperCase()}</div>
+                        <div class="result-username">${targetUsername.toUpperCase()}</div>
+                    </div>
+                    <button class="cancel-request-btn" style="padding: 6px 15px; background: linear-gradient(180deg, #c94c4c 0%, #9c4040 100%); border: 2px solid #2b1704; border-radius: 6px; font-family: 'Anton', sans-serif; cursor: pointer; color: white;">CANCEL</button>
+                `;
+
+                const cancelBtn = resultItem.querySelector('.cancel-request-btn');
+                cancelBtn.onclick = () => {
+                    const targetData = getUserData(targetUsername);
+                    if (targetData && targetData.friendRequests) {
+                        targetData.friendRequests = targetData.friendRequests.filter(name => name !== activeUser);
+                        saveUserData(targetUsername, targetData);
+                        renderFriendRequests(); // Re-render to update the list
+                    }
+                };
+
+                outgoingRequestsResults.appendChild(resultItem);
+            });
+        } else {
+            outgoingRequestsResults.classList.add('hidden');
+            outgoingRequestsEmptyState.classList.remove('hidden');
+        }
+    }
+
+    // Open Friends Modal (from floating btn)
+    const openFriendsModal = () => {
+        renderFriendsList();
+        updateRequestsBadge();
+        renderFriendRequests();
+        toggleModal(friendsModal, true);
+    };
+
+    if (floatingFriendsBtn && friendsModal && friendsCloseBtn) {
+        floatingFriendsBtn.addEventListener('click', openFriendsModal);
 
         friendsCloseBtn.addEventListener('click', () => {
             toggleModal(friendsModal, false);
         });
+    }
 
-        // Search Logic
+    // Friends Modal Tab Switching
+    if (friendsTabs.length > 0) {
+        friendsTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                friendsTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                friendsPanes.forEach(pane => {
+                    pane.classList.add('hidden-pane');
+                    pane.classList.remove('active-pane');
+                });
+
+                const targetId = tab.getAttribute('data-target');
+                if (targetId) {
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.remove('hidden-pane');
+                        targetPane.classList.add('active-pane');
+                    }
+                }
+
+                // Refresh specific tab data if needed
+                if (targetId === 'paneFriendsList') renderFriendsList();
+                if (targetId === 'paneFriendsRequests') renderFriendRequests();
+            });
+        });
+    }
+
+    // Search Logic
+    if (friendsSearchBtn) {
         friendsSearchBtn.addEventListener('click', () => {
             const query = friendsSearchInput.value.trim().toLowerCase();
             if (!query) return;
@@ -167,37 +446,64 @@ document.addEventListener('DOMContentLoaded', () => {
             // Clear previous results
             friendsSearchResults.innerHTML = '';
             friendsSearchResults.classList.remove('hidden');
-            friendsEmptyState.classList.add('hidden');
+            friendsSearchEmptyState.classList.add('hidden');
 
             const savedUsers = JSON.parse(localStorage.getItem('cartuninz_users') || '{}');
             const foundUsers = Object.keys(savedUsers).filter(username =>
                 username.toLowerCase().includes(query) && username.toLowerCase() !== activeUser.toLowerCase()
             );
 
+            const currentUserData = getUserData(activeUser);
+
             if (foundUsers.length > 0) {
                 foundUsers.forEach(username => {
                     const resultItem = document.createElement('div');
                     resultItem.className = 'search-result-item';
-                    resultItem.innerHTML = `
-                        <div class="result-user-info">
-                            <div class="result-avatar">${username.charAt(0).toUpperCase()}</div>
-                            <div class="result-username">${username.toUpperCase()}</div>
-                        </div>
-                        <button class="add-friend-btn">ADD</button>
-                    `;
 
-                    // Add dummy functionality to the ADD button
+                    const isAlreadyFriend = currentUserData && currentUserData.friends && currentUserData.friends.includes(username);
+                    const targetUserData = getUserData(username);
+                    const isRequestPending = targetUserData && targetUserData.friendRequests && targetUserData.friendRequests.includes(activeUser);
+
+                    let btnHtml = '';
+                    if (isAlreadyFriend) {
+                        btnHtml = '<button class="add-friend-btn" style="background: linear-gradient(180deg, #A8A8A8 0%, #606060 100%); pointer-events: none;">FRIENDS</button>';
+                    } else if (isRequestPending) {
+                        btnHtml = '<button class="add-friend-btn" style="background: linear-gradient(180deg, #A8A8A8 0%, #606060 100%); pointer-events: none;">PENDING</button>';
+                    } else {
+                        btnHtml = '<button class="add-friend-btn">ADD</button>';
+                    }
+
+                    resultItem.innerHTML = `
+                            <div class="result-user-info">
+                                <div class="result-avatar">${username.charAt(0).toUpperCase()}</div>
+                                <div class="result-username">${username.toUpperCase()}</div>
+                            </div>
+                            ${btnHtml}
+                        `;
+
                     const addBtn = resultItem.querySelector('.add-friend-btn');
-                    addBtn.onclick = () => {
-                        addBtn.textContent = 'PENDING';
-                        addBtn.disabled = true;
-                        addBtn.style.filter = 'grayscale(1)';
-                    };
+                    if (!isAlreadyFriend && !isRequestPending) {
+                        addBtn.onclick = () => {
+                            addBtn.textContent = 'PENDING';
+                            addBtn.style.background = 'linear-gradient(180deg, #A8A8A8 0%, #606060 100%)';
+                            addBtn.style.pointerEvents = 'none';
+
+                            // Save request to target user
+                            const targetData = getUserData(username);
+                            if (targetData) {
+                                if (!targetData.friendRequests) targetData.friendRequests = [];
+                                if (!targetData.friendRequests.includes(activeUser)) {
+                                    targetData.friendRequests.push(activeUser);
+                                    saveUserData(username, targetData);
+                                }
+                            }
+                        };
+                    }
 
                     friendsSearchResults.appendChild(resultItem);
                 });
             } else {
-                friendsSearchResults.innerHTML = '<div class="no-results-text">No users found matching "' + query + '"</div>';
+                friendsSearchResults.innerHTML = '<div class="no-results-text" style="color: #4a2e12; margin-top: 15px;">No users found matching "' + query + '"</div>';
             }
         });
     }
@@ -206,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userInfoBtn && profileModal && profileCloseBtn) {
         userInfoBtn.addEventListener('click', () => {
             if (profileNameLarge) {
-                profileNameLarge.textContent = activeUser;
+                profileNameLarge.textContent = activeUserData.gameName || activeUser;
             }
             if (profileRankLarge) {
                 profileRankLarge.textContent = `Lv. ${activeUserData.level} ${activeUserData.rank}`;
@@ -270,9 +576,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const savedUsers = JSON.parse(savedUsersStr);
                     // Check if any existing account matches the new name (case insensitive)
                     // Note: ignore the current active User's name just in case
-                    isTaken = isTaken || Object.keys(savedUsers).some(k =>
-                        k.toLowerCase() === newName.toLowerCase() && k.toLowerCase() !== activeUser.toLowerCase()
-                    );
+                    isTaken = isTaken || Object.values(savedUsers).some(userData => {
+                        const existingName = userData.gameName || 'unknown';
+                        return existingName.toLowerCase() === newName.toLowerCase() && existingName.toLowerCase() !== (activeUserData.gameName || activeUser).toLowerCase();
+                    });
                 }
 
                 if (isTaken) {
@@ -287,23 +594,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 let changeCount = activeUserData.nameChanges || 0;
                 activeUserData.nameChanges = changeCount + 1;
 
-                // Migrate user data to new name in localStorage map
+                // Update gameName property directly
+                activeUserData.gameName = newName;
+
+                // Save back to the SAME user key
                 const currentUserStr = localStorage.getItem('cartuninz_users');
                 if (currentUserStr) {
                     let usersMap = JSON.parse(currentUserStr);
                     if (usersMap[activeUser]) {
-                        usersMap[newName] = activeUserData; // save updated object with nameChanges
-                        delete usersMap[activeUser];
+                        usersMap[activeUser] = activeUserData;
                         localStorage.setItem('cartuninz_users', JSON.stringify(usersMap));
                     }
                 }
 
-                // Update active user state
-                activeUser = newName;
-                localStorage.setItem('cartuninz_active_user', newName);
-
-                // Update UI elements
-                if (hudUsername) hudUsername.textContent = newName;
+                // Update UI elements using the new gameName
+                if (hudUsername) hudUsername.textContent = newName.toUpperCase();
                 if (profileNameLarge) profileNameLarge.textContent = newName;
                 if (charNameDisplay) charNameDisplay.textContent = newName;
 

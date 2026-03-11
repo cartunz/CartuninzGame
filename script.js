@@ -137,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             loginPassword.type = 'password';
                         }
                     } else {
-                        // Update current active user and redirect
+                        // Update current active user and redirect.
+                        // We still use their login name as the key.
                         localStorage.setItem('cartuninz_active_user', inputUsername);
                         showLoadingOverlay(() => {
                             window.location.href = 'lobby.html';
@@ -180,17 +181,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // It is taken if:
             // 1. It is in the dummy takenUsernames array
-            // 2. OR it exists in savedUsers AND it does NOT belong to the current user setting up their account
+            // 2. OR it exists in savedUsers (checking their defined gameName, or if missing, their username) AND it does NOT belong to the current user setting up their account
             const isTaken = takenUsernames.some(u => u.toLowerCase() === gameName.toLowerCase()) ||
-                (Object.keys(savedUsers).some(k => k.toLowerCase() === gameName.toLowerCase()) &&
-                    gameName.toLowerCase() !== currentSetupUser.toLowerCase());
+                Object.values(savedUsers).some(userData => {
+                    const existingName = userData.gameName || 'unknown';
+                    return existingName.toLowerCase() === gameName.toLowerCase();
+                });
 
             if (isTaken) {
                 if (setupNameErrorMsg) setupNameErrorMsg.classList.remove('hidden');
                 return;
             }
 
-            // Migrate user to new game name
+            // Update user with their new game name
             let sourceUser = savedUsers[currentSetupUser] || {
                 email: 'test@example.com',
                 password: '123',
@@ -198,18 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 level: 1
             };
 
-            savedUsers[gameName] = sourceUser;
+            // Don't change the key! Just add the gameName property.
+            sourceUser.gameName = gameName;
+            delete sourceUser.newAccount;
 
-            if (currentSetupUser !== gameName && savedUsers[currentSetupUser]) {
-                delete savedUsers[currentSetupUser];
-            }
-
-            if (savedUsers[gameName]) {
-                delete savedUsers[gameName].newAccount;
-            }
+            savedUsers[currentSetupUser] = sourceUser;
 
             localStorage.setItem('cartuninz_users', JSON.stringify(savedUsers));
-            localStorage.setItem('cartuninz_active_user', gameName);
+            localStorage.setItem('cartuninz_active_user', currentSetupUser);
 
             showLoadingOverlay(() => {
                 window.location.href = 'lobby.html';
@@ -279,13 +278,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Save new user
+                // Save new user using their login name as the key
                 savedUsers[user] = {
                     email: email,
                     password: pass,
                     rank: 'NEWBIE',
                     level: 1,
-                    newAccount: true
+                    newAccount: true,
+                    gameName: user // Will be updated on setup
                 };
 
                 localStorage.setItem('cartuninz_users', JSON.stringify(savedUsers));
